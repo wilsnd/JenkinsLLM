@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="First commit" />
+    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="First commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/data_split.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/data_split.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/data_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/data_validator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/preprocessing.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;wilsnd&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/wilsnd/JenkinsLLM.git&quot;,
+    &quot;accountId&quot;: &quot;afce16cb-57a1-4113-b5db-7825f34ac9de&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -31,33 +49,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests in data_prep.py.executor": "Run",
-    "Python.convert_id.executor": "Run",
-    "Python.data_prep.executor": "Run",
-    "Python.english.executor": "Run",
-    "Python.preprocessing.executor": "Run",
-    "Python.split.executor": "Run",
-    "Python.stage1+2.executor": "Run",
-    "Python.stage1.executor": "Run",
-    "Python.stage2.executor": "Run",
-    "Python.stage3.executor": "Run",
-    "Python.tokenization.executor": "Run",
-    "Python.vocabularize.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/dirty/PycharmProjects/JenkinsLLM",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in data_prep.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.convert_id.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_prep.executor&quot;: &quot;Run&quot;,
+    &quot;Python.english.executor&quot;: &quot;Run&quot;,
+    &quot;Python.preprocessing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.split.executor&quot;: &quot;Run&quot;,
+    &quot;Python.stage1+2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.stage1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.stage2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.stage3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tokenization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vocabularize.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dirty/PycharmProjects/JenkinsLLM&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\dirty\PycharmProjects\JenkinsLLM" />
@@ -219,7 +237,7 @@
       <workItem from="1747920269722" duration="2951000" />
       <workItem from="1747974012848" duration="26058000" />
       <workItem from="1748011497455" duration="7307000" />
-      <workItem from="1748057431223" duration="21033000" />
+      <workItem from="1748057431223" duration="22827000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -243,7 +261,7 @@
     <SUITE FILE_PATH="coverage/JenkinsLLM$english.coverage" NAME="english Coverage Results" MODIFIED="1747981881983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$tokenization.coverage" NAME="tokenization Coverage Results" MODIFIED="1748001947325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1_2.coverage" NAME="stage1+2 Coverage Results" MODIFIED="1748065904369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing.coverage" NAME="preprocessing Coverage Results" MODIFIED="1748081513941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing.coverage" NAME="preprocessing Coverage Results" MODIFIED="1748082184681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1747975201944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748006352995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1.coverage" NAME="stage1 Coverage Results" MODIFIED="1748060457895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

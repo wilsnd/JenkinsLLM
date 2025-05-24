@@ -21,7 +21,7 @@ PRINTABLE_CHARS = frozenset(chr(i) for i in range(32, 127)) | {'\t', '\n', '\r',
 
 def load_english_words():
     """Load English words from english_words.txt"""
-    with open('../data/english_words.txt', 'r') as f:
+    with open('./data/english_words.txt', 'r') as f:
         words = {line.strip().lower() for line in f if line.strip()}
     print(f"Loaded {len(words)} English words")
     return words
@@ -277,4 +277,4 @@ def preprocess(input_dir, output_file):
 
 
 if __name__ == '__main__':
-    preprocess("../data/CC_data", "processed_data/preprocess_output.txt")
+    preprocess("./data/CC_data", "./processed_data")
