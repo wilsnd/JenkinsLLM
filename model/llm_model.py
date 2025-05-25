@@ -4,6 +4,7 @@ from .config import DEFAULT_CONFIG
 from .embedding import Embeddings
 from .transformer import TransformerDecoder
 from .attention import create_causal_mask
+import torch.nn.functional as F
 
 
 class SimpleLLM(nn.Module):
@@ -29,9 +30,14 @@ class SimpleLLM(nn.Module):
             config.d_ff
         )
 
-        self.output_projection = nn.Linear(config.d_model, config.vocab_size)
+        self.norm_f = nn.LayerNorm(config.d_model)
 
-        # Initialize weights
+        # Tied embedding
+        self.tie_embeddings = True
+        if not self.tie_embeddings:
+            self.output_projection = nn.Linear(config.d_model, config.vocab_size, bias=False)
+
+        # Initialize the weights
         self.apply(self._init_weights)
 
     def _init_weights(self, module):
@@ -53,7 +59,13 @@ class SimpleLLM(nn.Module):
         # Forward pass
         x = self.embeddings(input_ids)
         x = self.decoder(x, mask)
-        logits = self.output_projection(x)
+        x = self.norm_f(x)
+
+        # Tied embeddings
+        if self.tie_embeddings:
+            logits = F.linear(x, self.embeddings.token_emb.embedding.weight)
+        else:
+            logits = self.output_projection(x)
 
         return logits
 

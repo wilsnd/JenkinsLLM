@@ -40,4 +40,5 @@ def build_vocabulary(train_file, vocab_file, min_freq=250):
     print(f"Saved to: {vocab_file}")
 
 
-build_vocabulary("../processed_data/train.json", "../processed_data/vocabulary.json")
+if __name__ == "__main__":
+    build_vocabulary("../processed_data/train.json", "../processed_data/vocabulary.json", min_freq=250)

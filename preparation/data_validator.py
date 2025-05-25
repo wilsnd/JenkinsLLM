@@ -78,19 +78,18 @@ def validate_all():
 
     # Check files
     files_to_check = [
-        ".processed_data/vocabulary.json",
-        ".processed_data/training_data.json",
-        ".processed_data/train.json",
-        ".processed_data/val.json",
-        ".processed_data/test.json"
+        "../processed_data/vocabulary.json",
+        "../processed_data/train.json",
+        "../processed_data/val.json",
+        "../processed_data/test.json"
     ]
 
     for file in files_to_check:
         validator.validate_file(file)
 
     # Specific validations
-    validator.validate_vocab(".processed_data/vocabulary.json")
-    validator.validate_training_data(".processed_data/training_data.json")
+    validator.validate_vocab("../processed_data/vocabulary.json")
+    validator.validate_training_data("../processed_data/train.json")
 
     if validator.is_valid():
         print("All validations passed!")

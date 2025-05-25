@@ -4,7 +4,7 @@ from model import create_model
 
 
 class TextGenerator:
-    """Simple text generator"""
+    """Generate text"""
 
     def __init__(self, model_path, vocab_path):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

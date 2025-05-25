@@ -1,18 +1,22 @@
 import torch
 import torch.nn as nn
 from .attention import MultiHeadAttention
+import torch.nn.functional as F
 
 
 class FeedForward(nn.Module):
     def __init__(self, d_model, d_ff):
         super().__init__()
-        self.linear1 = nn.Linear(d_model, d_ff)
-        self.linear2 = nn.Linear(d_ff, d_model)
+        self.w1 = nn.Linear(d_model, d_ff, bias=False)  # Gate
+        self.w2 = nn.Linear(d_model, d_ff, bias=False)  # Value
+        self.w3 = nn.Linear(d_ff, d_model, bias=False)  # Output
         self.dropout = nn.Dropout(0.1)
 
     def forward(self, x):
-        return self.linear2(self.dropout(torch.relu(self.linear1(x))))
-
+        # SwiGLUU~~~~
+        gate = self.w1(x)
+        value = self.w2(x)
+        return self.w3(self.dropout(F.silu(gate) * value))
 
 class TransformerBlock(nn.Module):
     def __init__(self, d_model, n_heads, d_ff):
@@ -24,13 +28,13 @@ class TransformerBlock(nn.Module):
         self.dropout = nn.Dropout(0.1)
 
     def forward(self, x, mask=None):
-        # Self-attention with residual connection
-        attn_output = self.attention(x, x, x, mask)
-        x = self.norm1(x + self.dropout(attn_output))
+        # Self-attention
+        attn_output = self.attention(self.norm1(x), self.norm1(x), self.norm1(x), mask)
+        x = x + self.dropout(attn_output)
 
-        # Feed-forward with residual connection
-        ff_output = self.feed_forward(x)
-        x = self.norm2(x + self.dropout(ff_output))
+        # Feed-forward
+        ff_output = self.feed_forward(self.norm2(x))
+        x = x + self.dropout(ff_output)
 
         return x
 

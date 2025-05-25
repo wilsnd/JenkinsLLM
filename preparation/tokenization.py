@@ -5,7 +5,7 @@ import json
 def tokenize(input_file, output_file):
     """Simple Word Tokenizer"""
 
-    print("=== Simple Tokenizer ===")
+    print("=== Tokenizer ===")
 
     # Load the file
     with open(input_file, 'r', encoding='utf-8') as f:
@@ -35,4 +35,5 @@ def tokenize(input_file, output_file):
     print(f"Saved to: {output_file}")
 
 
-tokenize("../processed_data/cleaned_data.txt", "../processed_data/tokenized.json")
+if __name__ == "__main__":
+    tokenize("../processed_data/cleaned_data.txt", "../processed_data/tokenized.json")

@@ -11,23 +11,24 @@ class MultiHeadAttention(nn.Module):
         self.n_heads = n_heads
         self.d_k = d_model // n_heads
 
-        self.w_q = nn.Linear(d_model, d_model)
-        self.w_k = nn.Linear(d_model, d_model)
-        self.w_v = nn.Linear(d_model, d_model)
-        self.w_o = nn.Linear(d_model, d_model)
+        self.w_qkv = nn.Linear(d_model, 3 * d_model, bias=False)
+        self.w_o = nn.Linear(d_model, d_model, bias=False)
 
         self.dropout = nn.Dropout(0.1)
+        self.scale = 1.0 / math.sqrt(self.d_k)
 
     def forward(self, query, key, value, mask=None):
         batch_size = query.size(0)
 
         # Linear projections
-        Q = self.w_q(query).view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
-        K = self.w_k(key).view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
-        V = self.w_v(value).view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
+        qkv = self.w_qkv(query)
+        q, k, v = qkv.chunk(3, dim=-1)
+        Q = q.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
+        K = k.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
+        V = v.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
 
         # Attention
-        scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(self.d_k)
+        scores = torch.matmul(Q, K.transpose(-2, -1)) * self.scale
 
         if mask is not None:
             scores.masked_fill_(mask == 0, -1e9)

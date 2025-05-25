@@ -5,7 +5,7 @@ from .optimizer import create_optimizer, create_scheduler
 from .checkpointing import save_checkpoint, load_checkpoint, save_model
 from .memory_optimizer import clear_cache, get_memory_usage, print_memory
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 def get_version():

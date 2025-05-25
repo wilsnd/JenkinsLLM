@@ -2,15 +2,15 @@ class ModelConfig:
     def __init__(self):
         # Model size
         self.vocab_size = 10000
-        self.d_model = 64
-        self.n_heads = 2
-        self.n_layers = 1
-        self.d_ff = 128
+        self.d_model = 256
+        self.n_heads = 8
+        self.n_layers = 6
+        self.d_ff = int(self.d_model * 2.7)  # Swiglu is 2.7x, if use ReLU 4x
         self.max_seq_len = 128
 
         # Training
-        self.dropout = 0.1
-        self.learning_rate = 0.0001
+        self.dropout = 0.0
+        self.learning_rate = 0.0003
         self.batch_size = 4
 
         # Tokens
