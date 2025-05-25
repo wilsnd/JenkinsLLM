@@ -41,4 +41,17 @@ def convert_to_id(tokenized_file, vocab_file, output_file):
     print(f"Saved to: {output_file}")
 
 
-convert_to_id("../old_files/tokenized.json", "extra_files/vocabulary.json", "extra_files/training_data.json")
+# Convert train.json
+convert_to_id("../processed_data/train.json",
+              "../processed_data/vocabulary.json",
+              "../processed_data/train_ids.json")
+
+# Convert val.json
+convert_to_id("../processed_data/val.json",
+              "../processed_data/vocabulary.json",
+              "../processed_data/val_ids.json")
+
+# Convert test.json
+convert_to_id("../processed_data/test.json",
+              "../processed_data/vocabulary.json",
+              "../processed_data/test_ids.json")

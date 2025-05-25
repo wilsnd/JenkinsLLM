@@ -42,4 +42,4 @@ def split_data(input_file, output_dir):
 
 
 if __name__ == "__main__":
-    split_data("./processed_data/preprocess_output.txt", "./processed_data")
+    split_data("../processed_data/tokenized.json", "../processed_data")

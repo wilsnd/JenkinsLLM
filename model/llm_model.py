@@ -7,6 +7,7 @@ from .attention import create_causal_mask
 
 
 class SimpleLLM(nn.Module):
+    """EZ model"""
     def __init__(self, config=None):
         super().__init__()
         if config is None:

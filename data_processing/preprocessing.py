@@ -13,6 +13,56 @@ from collections import deque
 WORD_PATTERN = re.compile(r'\b[a-zA-Z]+\b')
 SENTENCE_PATTERN = re.compile(r'[.!?]+')
 PRINTABLE_PATTERN = re.compile(b'[\x20-\x7E\x09\x0A\x0D]')
+NAV_PATTERNS = [
+    re.compile(r'\b(home|about|contact|login|register|sign in|sign up)\b', re.IGNORECASE),
+    re.compile(r'\b(menu|navigation|navbar|footer|header|sidebar)\b', re.IGNORECASE),
+    re.compile(r'\b(skip to|jump to|go to|click here|read more|learn more)\b', re.IGNORECASE),
+    re.compile(r'\b(subscribe|newsletter|follow us|share|like|tweet)\b', re.IGNORECASE),
+    re.compile(r'\b(facebook|twitter|x|instagram|linkedin|youtube)\b', re.IGNORECASE),
+    re.compile(r'\b(search|categories|tags|archive|recent posts)\b', re.IGNORECASE)
+]
+UI_PATTERNS = [
+    re.compile(r'toggle navigation', re.IGNORECASE),
+    re.compile(r'show/hide menu', re.IGNORECASE),
+    re.compile(r'expand/collapse', re.IGNORECASE),
+    re.compile(r'previous\s+next', re.IGNORECASE),
+    re.compile(r'page \d+ of \d+', re.IGNORECASE),
+    re.compile(r'showing \d+ results', re.IGNORECASE),
+    re.compile(r'sort by|filter by', re.IGNORECASE),
+    re.compile(r'view all|see more|show all', re.IGNORECASE)
+]
+LEGAL_PATTERNS = [
+    re.compile(r'©.*?\d{4}.*?(all rights reserved|copyright)', re.IGNORECASE),
+    re.compile(r'privacy policy|terms of service|cookie policy', re.IGNORECASE),
+    re.compile(r'gdpr|data protection|privacy notice', re.IGNORECASE),
+    re.compile(r'powered by.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'designed by.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'copyright.*?\d{4}.*?(?=\n|\.|$)', re.IGNORECASE)
+]
+AD_PATTERNS = [
+    re.compile(r'advertisement.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'sponsored.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'affiliate.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'promotion.*?(?=\n|\.|$)', re.IGNORECASE),
+    re.compile(r'\b(buy now|order now|get now|download now)\b', re.IGNORECASE),
+    re.compile(r'\b(free trial|limited time|special offer|discount)\b', re.IGNORECASE)
+]
+TECH_PATTERNS = [
+    re.compile(r'<[^>]+>'),  # HTML tags
+    re.compile(r'\{[^}]*\}'),  # CSS/JavaScript
+    re.compile(r'function\s*\([^)]*\)'),  # Function definitions
+    re.compile(r'var\s+\w+\s*='),  # Variable declarations
+    re.compile(r'document\.\w+'),  # JavaScript DOM
+    re.compile(r'window\.\w+'),  # JavaScript window
+    re.compile(r'console\.\w+'),  # Console commands
+]
+SPECIAL_CHARS = re.compile(r'[|•→←↑↓◦▪▫□■►◄]+')
+DIVIDER_LINES = re.compile(r'\s*[-_=]{3,}\s*')
+ASTERISK_DIVIDERS = re.compile(r'\*{3,}')
+MULTIPLE_NEWLINES = re.compile(r'\n\s*\n\s*\n+')
+MULTIPLE_SPACES = re.compile(r'[ \t]+')
+TRIM_LINES = re.compile(r'^\s+|\s+$', re.MULTILINE)
+FINAL_SPACING = re.compile(r'\n\s*\n\s*\n+')
 
 # Lookup tables
 LATIN_ALPHA = frozenset(chr(i) for i in range(256) if chr(i).isalpha())
@@ -21,7 +71,7 @@ PRINTABLE_CHARS = frozenset(chr(i) for i in range(32, 127)) | {'\t', '\n', '\r',
 
 def load_english_words():
     """Load English words from english_words.txt"""
-    with open('./data/english_words.txt', 'r') as f:
+    with open('../data/english_words.txt', 'r') as f:
         words = {line.strip().lower() for line in f if line.strip()}
     print(f"Loaded {len(words)} English words")
     return words
@@ -136,6 +186,66 @@ def quality_check(text):
     return True
 
 
+def clean_web_content(text):
+    """Additional web data cleaning"""
+    if not text or len(text) < 100:
+        return ""
+
+    # Remove HTML tags
+    for pattern in TECH_PATTERNS:
+        text = pattern.sub(' ', text)
+
+    # Remove nav elements
+    for pattern in NAV_PATTERNS:
+        text = pattern.sub(' ', text)
+
+    # Remove UI elements
+    for pattern in UI_PATTERNS:
+        text = pattern.sub(' ', text)
+
+    # Remove Legal
+    for pattern in LEGAL_PATTERNS:
+        text = pattern.sub(' ', text)
+
+    # Remove ads
+    for pattern in AD_PATTERNS:
+        text = pattern.sub(' ', text)
+
+    # Remove specials chars
+    text = SPECIAL_CHARS.sub(' ', text)
+    text = DIVIDER_LINES.sub('\n', text)
+    text = ASTERISK_DIVIDERS.sub('\n', text)
+
+    # Clean up
+    text = MULTIPLE_SPACES.sub(' ', text)
+    text = TRIM_LINES.sub('', text)
+    text = MULTIPLE_NEWLINES.sub('\n\n', text)
+
+    return text
+
+def remove_web_boilerplate(text):
+    """Remove the top and bottom section"""
+    text = clean_web_content(text)
+
+    lines = text.split('\n')
+
+    # Filter out very short lines
+    content_lines = []
+    for line in lines:
+        stripped = line.strip()
+        if len(stripped) > 15:  # Keep substantial content only
+            content_lines.append(stripped)
+
+    # Skip first and last section
+    if len(content_lines) > 10:
+        # Skip first 15% and last 15%
+        start = int(len(content_lines) * 0.15)
+        end = int(len(content_lines) * 0.85)
+        content_lines = content_lines[start:end]
+
+    return '\n'.join(content_lines)
+
+
 def process_file(wet_file, out, english_words):
     """Process single WET file"""
 
@@ -154,6 +264,10 @@ def process_file(wet_file, out, english_words):
 
                 text = content_bytes.decode('utf-8', errors='ignore')
 
+                # Clean website boilerplate
+                text = remove_web_boilerplate(text)
+
+                # Document check
                 if is_good(text, english_words) and quality_check(text):
                     batch_texts.append(text + '\n\n---\n\n')
                     kept += 1
@@ -186,11 +300,13 @@ def process_file_worker(args):
         raise e
 
 
-def preprocess(input_dir, output_file):
+def preprocess(input_dir, output_file, num_files=None):
     """Process all WET files in the folder"""
 
     wet_files = glob.glob(os.path.join(input_dir, "*.warc.wet.gz"))
-    print(f"Found {len(wet_files)} WET files")
+    if num_files is not None and num_files > 0:
+        wet_files = wet_files[:num_files]
+    print(f"Found {len(wet_files)} WET files (processing {'all' if num_files is None else num_files})")
 
     english_words = load_english_words()
     total = 0
@@ -266,7 +382,7 @@ def preprocess(input_dir, output_file):
                         out.write(buffer + '\n\n---\n\n')
                         kept_after_dedup += 1
 
-                os.unlink(temp_file)
+            os.unlink(temp_file)
 
     print(f"\n=== Preprocessing ===")
     print(f"Total documents: {total:,}")
@@ -277,4 +393,4 @@ def preprocess(input_dir, output_file):
 
 
 if __name__ == '__main__':
-    preprocess("./data/CC_data", "./processed_data")
+    preprocess("../data/CC_data", "../processed_data/cleaned_data.txt", 10)

@@ -35,4 +35,4 @@ def tokenize(input_file, output_file):
     print(f"Saved to: {output_file}")
 
 
-tokenize("../old_files/stage_3_output.txt", "extra_files/tokenized.json")
+tokenize("../processed_data/cleaned_data.txt", "../processed_data/tokenized.json")

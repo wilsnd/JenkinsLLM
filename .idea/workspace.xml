@@ -4,12 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="First commit">
+    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Commit 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/convert_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/convert_id.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_processing/data_split.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/data_split.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/data_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/data_validator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_processing/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/tokenization.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/tokenization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_processing/vocabularize.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/vocabularize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/api_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/batch_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/batch_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/gradio_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/gradio_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/llm_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/llm_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_data/preprocess_output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/train_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/checkpointing.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/checkpointing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/data_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/memory_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/memory_optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,17 +72,24 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_training.test_training_pipeline.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in data_prep.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_training.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.batch_inference.executor&quot;: &quot;Run&quot;,
     &quot;Python.convert_id.executor&quot;: &quot;Run&quot;,
     &quot;Python.data_prep.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_split.executor&quot;: &quot;Run&quot;,
     &quot;Python.english.executor&quot;: &quot;Run&quot;,
+    &quot;Python.preprocessing (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.preprocessing.executor&quot;: &quot;Run&quot;,
     &quot;Python.split.executor&quot;: &quot;Run&quot;,
     &quot;Python.stage1+2.executor&quot;: &quot;Run&quot;,
     &quot;Python.stage1.executor&quot;: &quot;Run&quot;,
     &quot;Python.stage2.executor&quot;: &quot;Run&quot;,
     &quot;Python.stage3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;Python.tokenization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_model.executor&quot;: &quot;Run&quot;,
     &quot;Python.vocabularize.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -89,8 +116,8 @@
       <recent name="C:\Users\dirty\PycharmProjects\JenkinsLLM" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.preprocessing">
-    <configuration name="preprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.gradio_demo">
+    <configuration name="batch_inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -99,12 +126,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/inference" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\dirty\PycharmProjects\JenkinsLLM\data_processing\preprocessing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inference/batch_inference.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -113,7 +140,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="split" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="convert_id" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,12 +149,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_processing" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/split.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_processing/convert_id.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -136,7 +163,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="stage1+2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -145,12 +172,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/inference" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\dirty\PycharmProjects\JenkinsLLM\old_files\stage1+2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inference/generator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,7 +186,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="stage2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="gradio_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -168,12 +195,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/inference" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\dirty\PycharmProjects\JenkinsLLM\old_files\stage2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inference/gradio_demo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -182,7 +209,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="stage3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="train_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,12 +218,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\dirty\PycharmProjects\JenkinsLLM\old_files\stage3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/train_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -207,11 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.preprocessing" />
-        <item itemvalue="Python.split" />
-        <item itemvalue="Python.stage3" />
-        <item itemvalue="Python.stage1+2" />
-        <item itemvalue="Python.stage2" />
+        <item itemvalue="Python.gradio_demo" />
+        <item itemvalue="Python.generator" />
+        <item itemvalue="Python.batch_inference" />
+        <item itemvalue="Python.train_model" />
+        <item itemvalue="Python.convert_id" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +264,8 @@
       <workItem from="1747920269722" duration="2951000" />
       <workItem from="1747974012848" duration="26058000" />
       <workItem from="1748011497455" duration="7307000" />
-      <workItem from="1748057431223" duration="22827000" />
+      <workItem from="1748057431223" duration="40217000" />
+      <workItem from="1748146545235" duration="663000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -247,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748081657785</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Upload model part">
+      <option name="closed" value="true" />
+      <created>1748083894131</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748083894131</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,20 +291,27 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+    <MESSAGE value="Upload model part" />
+    <MESSAGE value="Commit 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit 3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/JenkinsLLM$english.coverage" NAME="english Coverage Results" MODIFIED="1747981881983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$tokenization.coverage" NAME="tokenization Coverage Results" MODIFIED="1748001947325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$tokenization.coverage" NAME="tokenization Coverage Results" MODIFIED="1748103780254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1_2.coverage" NAME="stage1+2 Coverage Results" MODIFIED="1748065904369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing.coverage" NAME="preprocessing Coverage Results" MODIFIED="1748082184681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1747975201944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748006352995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing.coverage" NAME="preprocessing Coverage Results" MODIFIED="1748103612641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing__1_.coverage" NAME="preprocessing (1) Coverage Results" MODIFIED="1748091930230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748102094885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/unit" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748103903204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1.coverage" NAME="stage1 Coverage Results" MODIFIED="1748060457895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_prep.coverage" NAME="stage1 Coverage Results" MODIFIED="1747991662712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage2.coverage" NAME="stage2 Coverage Results" MODIFIED="1748064600950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$test.coverage" NAME="test Coverage Results" MODIFIED="1748099268802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/old_files" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$train_model.coverage" NAME="train_model Coverage Results" MODIFIED="1748103982086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$split.coverage" NAME="split Coverage Results" MODIFIED="1748078026294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$batch_inference.coverage" NAME="batch_inference Coverage Results" MODIFIED="1748103224706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage3.coverage" NAME="stage3 Coverage Results" MODIFIED="1748069435623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$convert_id.coverage" NAME="convert_id Coverage Results" MODIFIED="1748002351606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$data_split.coverage" NAME="data_split Coverage Results" MODIFIED="1748103842971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$convert_id.coverage" NAME="convert_id Coverage Results" MODIFIED="1748103942711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
   </component>
 </project>

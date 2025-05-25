@@ -3,13 +3,13 @@ from collections import Counter
 from tqdm import tqdm
 
 
-def build_vocabulary(tokenized_file, vocab_file, min_freq=5):
+def build_vocabulary(train_file, vocab_file, min_freq=250):
     """Make the vocabulary from the tokenized data"""
 
     print("=== BUILDING VOCABULARY ===")
 
-    # Load tokenized data
-    with open(tokenized_file, 'r', encoding='utf-8') as f:
+    # Load split train data
+    with open(train_file, 'r', encoding='utf-8') as f:
         tokenized_docs = json.load(f)
 
     # Count total words
@@ -40,4 +40,4 @@ def build_vocabulary(tokenized_file, vocab_file, min_freq=5):
     print(f"Saved to: {vocab_file}")
 
 
-build_vocabulary("../old_files/tokenized.json", "extra_files/vocabulary.json")
+build_vocabulary("../processed_data/train.json", "../processed_data/vocabulary.json")
