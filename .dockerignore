@@ -1,0 +1,22 @@
+# Heavy folders
+data/
+processed_data/
+models/
+old_files/
+
+# Model
+*.pt
+*.pth
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Git
+.git/
+.gitignore
+
+# Other
+*.log
+.env

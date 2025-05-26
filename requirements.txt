@@ -1,5 +1,6 @@
-torch~=2.5.1+cu118
+torch~=2.5.1
 tqdm~=4.67.1
 warcio~=1.7.5
 xxhash~=3.5.0
 flask~=2.2.5
+# torch+cu118 can be installed if NVidia CUDA gpu is available !!! Important !!!
