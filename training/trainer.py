@@ -3,24 +3,31 @@ import torch.nn as nn
 import os
 from tqdm import tqdm
 from .data_loader import create_data_loader
+from .optimizer import create_optimizer, create_scheduler
+from .metrics import calculate_accuracy, calculate_perplexity
+from .memory_optimizer import clear_cache, print_memory
 
 class SimpleTrainer:
-    """EZ and simple trainer, no time to implement complex one"""
+    """EZ and simple trainer"""
 
     def __init__(self, model):
         self.model = model
         # GPU if available
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model.to(self.device)
-        self.optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+        self.optimizer = create_optimizer(model, lr=model.config.learning_rate)
+        self.scheduler = create_scheduler(self.optimizer)
         self.loss_fn = nn.CrossEntropyLoss()
 
         print(f"Using device: {self.device}")
+        print_memory()
 
     def train_epoch(self, train_loader):
         """Train model for one epoch"""
         self.model.train()  # Set to train mode
         total_loss = 0
+        total_accuracy = 0
 
         for batch in tqdm(train_loader, desc="Training"):
             batch = batch.to(self.device)
@@ -36,18 +43,26 @@ class SimpleTrainer:
             # Calculate loss
             loss = self.loss_fn(outputs.reshape(-1, outputs.size(-1)), targets.reshape(-1))
 
+            # Calculate accuracy
+            accuracy = calculate_accuracy(outputs.reshape(-1, outputs.size(-1)), targets.reshape(-1))
+
             # Backward pass and optimization
             loss.backward()
             self.optimizer.step()
 
             total_loss += loss.item()
+            total_accuracy += accuracy
 
-        return total_loss / len(train_loader)
+        # Clear cache after each epoch
+        clear_cache()
+
+        return total_loss / len(train_loader), total_accuracy / len(train_loader)
 
     def evaluate(self, val_loader):
         """Evaluate model on val set"""
         self.model.eval()  # Set to eval mode
         total_loss = 0
+        total_accuracy = 0
 
         # No grad computation
         with torch.no_grad():
@@ -58,9 +73,20 @@ class SimpleTrainer:
 
                 outputs = self.model(input_ids)
                 loss = self.loss_fn(outputs.reshape(-1, outputs.size(-1)), targets.reshape(-1))
-                total_loss += loss.item()
 
-        return total_loss / len(val_loader)
+                # Calculate accuracy
+                accuracy = calculate_accuracy(outputs.reshape(-1, outputs.size(-1)), targets.reshape(-1))
+
+                total_loss += loss.item()
+                total_accuracy += accuracy
+
+        avg_loss = total_loss / len(val_loader)
+        avg_accuracy = total_accuracy / len(val_loader)
+
+        # Calculate perplexity
+        perplexity = calculate_perplexity(avg_loss)
+
+        return avg_loss, avg_accuracy, perplexity
 
     def train(self, train_file, val_file, epochs=5):
         """Main training loop"""
@@ -75,10 +101,13 @@ class SimpleTrainer:
             print(f"\nEpoch {epoch}/{epochs}")
 
             # Train and evaluate
-            train_loss = self.train_epoch(train_loader)
-            val_loss = self.evaluate(val_loader)
+            train_loss, train_acc = self.train_epoch(train_loader)
+            val_loss, val_acc, perplexity = self.evaluate(val_loader)
+            print(f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f}")
+            print(f"Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}, Perplexity: {perplexity:.4f}")
+            print_memory()
 
-            print(f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+            self.scheduler.step()
 
         # Save trained model with version
         self._save_model()

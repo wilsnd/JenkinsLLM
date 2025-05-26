@@ -1,7 +1,7 @@
 # Config
 PREPARATION_CONFIG = {
     "min_vocab_frequency": 250,
-    "max_sequence_length": 128,
+    "max_sequence_length": 32,
     "train_split": 0.8,
     "validation_split": 0.1,
     "test_split": 0.1,

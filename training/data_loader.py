@@ -1,6 +1,7 @@
 import json
 import torch
 from torch.utils.data import Dataset, DataLoader
+from model.config import DEFAULT_CONFIG
 
 
 class TextDataset(Dataset):
@@ -44,8 +45,11 @@ def collate_fn(batch):
     return torch.stack(padded_batch)
 
 
-def create_data_loader(data_file, batch_size=32, max_length=128):
+def create_data_loader(data_file, batch_size=None, max_length=128):
     """PyTorch DataLoader from JSON file"""
+    if batch_size is None:
+        batch_size = DEFAULT_CONFIG.batch_size
+
     dataset = TextDataset(data_file, max_length)
     return DataLoader(
         dataset,

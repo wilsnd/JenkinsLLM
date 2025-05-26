@@ -1,11 +1,32 @@
 import json
 from tqdm import tqdm
+from config import get_preparation_config
+
+
+def words_to_ids(words, vocab):
+    """Convert list of words to token IDs"""
+    doc_ids = [vocab['<START>']]
+    unk_count = 0
+
+    for word in words:
+        if word in vocab:
+            doc_ids.append(vocab[word])
+        else:
+            doc_ids.append(vocab['<UNK>'])
+            unk_count += 1
+
+    doc_ids.append(vocab['<END>'])
+    return doc_ids, unk_count
 
 
 def convert_to_id(tokenized_file, vocab_file, output_file):
     """Convert words to IDs"""
 
     print("=== CONVERTING TO IDS ===")
+
+    # Load config
+    config = get_preparation_config()
+    max_length = config["max_sequence_length"]
 
     # Load the vocab
     with open(vocab_file, 'r', encoding='utf-8') as f:
@@ -17,27 +38,33 @@ def convert_to_id(tokenized_file, vocab_file, output_file):
 
     # Convert to IDs
     id_docs = []
-    unk_count = 0
+    total_unk_count = 0
+    long_docs = 0
 
     for doc in tqdm(tokenized_docs, desc="Convert to IDs"):
-        doc_ids = [vocab['<START>']]
-
-        for word in doc:
-            if word in vocab:
-                doc_ids.append(vocab[word])
-            else:
-                doc_ids.append(vocab['<UNK>'])
-                unk_count += 1
-
-        doc_ids.append(vocab['<END>'])
-        id_docs.append(doc_ids)
+        if len(doc) > max_length - 2:  # The 2 is for START and END token
+            # Long docs
+            long_docs += 1
+            # Split into chunks
+            chunk_size = max_length - 2
+            for i in range(0, len(doc), chunk_size):
+                chunk = doc[i:i + chunk_size]
+                if len(chunk) >= 10:  # Only keep substantial chunks
+                    doc_ids, unk_count = words_to_ids(chunk, vocab)
+                    id_docs.append(doc_ids)
+                    total_unk_count += unk_count
+        else:
+            # Short docs
+            doc_ids, unk_count = words_to_ids(doc, vocab)
+            id_docs.append(doc_ids)
+            total_unk_count += unk_count
 
     # Save
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(id_docs, f)
 
     print(f"Documents: {len(id_docs):,}")
-    print(f"Unknown words: {unk_count:,}")
+    print(f"Unknown words: {total_unk_count:,}")
     print(f"Saved to: {output_file}")
 
 
