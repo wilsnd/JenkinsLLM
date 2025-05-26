@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="WEB AND 9H LLM WORKING">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Jenkins">
+      <change afterPath="$PROJECT_DIR$/tests/unit/mock_data/test_val.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_clean.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/unit/test_prepare.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/mock_data/test_train.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,49 +63,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for test_training.test_training_pipeline.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in data_prep.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in test_training.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api_server.executor&quot;: &quot;Run&quot;,
-    &quot;Python.batch_inference.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cleaner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convert_id.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_prep.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_split.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_validator.executor&quot;: &quot;Run&quot;,
-    &quot;Python.english.executor&quot;: &quot;Run&quot;,
-    &quot;Python.flask_web (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.flask_web.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gradio_demo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.prepare.executor&quot;: &quot;Run&quot;,
-    &quot;Python.preprocessing (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.preprocessing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.split.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stage1+2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stage1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stage2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stage3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tokenization.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vocabularize.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/dirty/PycharmProjects/JenkinsLLM&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_inference.test_batch_inference_basic.executor": "Run",
+    "Python tests.Python tests for test_inference.test_text_generator_basic.executor": "Run",
+    "Python tests.Python tests for test_training.test_training_pipeline.executor": "Run",
+    "Python tests.Python tests in data_prep.py.executor": "Run",
+    "Python tests.Python tests in test_inference.py.executor": "Run",
+    "Python tests.Python tests in test_training.py.executor": "Run",
+    "Python.api_server.executor": "Run",
+    "Python.batch_inference.executor": "Run",
+    "Python.cleaner.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.convert_id.executor": "Run",
+    "Python.data_prep.executor": "Run",
+    "Python.data_split.executor": "Run",
+    "Python.data_validator.executor": "Run",
+    "Python.english.executor": "Run",
+    "Python.flask_web (1).executor": "Run",
+    "Python.flask_web.executor": "Run",
+    "Python.gradio_demo.executor": "Run",
+    "Python.prepare.executor": "Run",
+    "Python.preprocessing (1).executor": "Run",
+    "Python.preprocessing.executor": "Run",
+    "Python.split.executor": "Run",
+    "Python.stage1+2.executor": "Run",
+    "Python.stage1.executor": "Run",
+    "Python.stage2.executor": "Run",
+    "Python.stage3.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.tokenization.executor": "Run",
+    "Python.train_model.executor": "Run",
+    "Python.vocabularize.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/dirty/PycharmProjects/JenkinsLLM",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\dirty\PycharmProjects\JenkinsLLM" />
@@ -116,129 +122,94 @@
       <recent name="C:\Users\dirty\PycharmProjects\JenkinsLLM\tests\unit" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.flask_web">
-    <configuration name="batch_inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests in test_inference.py">
+    <configuration name="Python tests for test_inference.test_batch_inference_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/inference" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inference/batch_inference.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_inference.test_batch_inference_basic&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_inference.test_text_generator_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/config.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_inference.test_text_generator_basic&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="convert_id" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_training.test_training_pipeline" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preparation" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preparation/convert_id.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_training.test_training_pipeline&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="flask_web" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in test_inference.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/inference" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/inference/flask_web.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/unit/test_inference.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="train_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in test_training.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/train_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/unit/test_training.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.flask_web" />
-        <item itemvalue="Python.batch_inference" />
-        <item itemvalue="Python.train_model" />
-        <item itemvalue="Python.config" />
-        <item itemvalue="Python.convert_id" />
+        <item itemvalue="Python tests.Python tests in test_inference.py" />
+        <item itemvalue="Python tests.Python tests for test_inference.test_text_generator_basic" />
+        <item itemvalue="Python tests.Python tests for test_inference.test_batch_inference_basic" />
+        <item itemvalue="Python tests.Python tests in test_training.py" />
+        <item itemvalue="Python tests.Python tests for test_training.test_training_pipeline" />
       </list>
     </recent_temporary>
   </component>
@@ -267,7 +238,7 @@
       <workItem from="1748057431223" duration="40217000" />
       <workItem from="1748146545235" duration="34472000" />
       <workItem from="1748189388231" duration="10615000" />
-      <workItem from="1748234516462" duration="2735000" />
+      <workItem from="1748234516462" duration="10278000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -317,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748231526171</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Jenkins">
+      <option name="closed" value="true" />
+      <created>1748238812715</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748238812715</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,12 +312,13 @@
     <MESSAGE value="Commit 4" />
     <MESSAGE value="Commit 5" />
     <MESSAGE value="WEB AND 9H LLM WORKING" />
-    <option name="LAST_COMMIT_MESSAGE" value="WEB AND 9H LLM WORKING" />
+    <MESSAGE value="Jenkins" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jenkins" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/JenkinsLLM$english.coverage" NAME="english Coverage Results" MODIFIED="1747981881983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1_2.coverage" NAME="stage1+2 Coverage Results" MODIFIED="1748065904369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748102094885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/unit" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748247987107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/unit" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748103903204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$api_server.coverage" NAME="api_server Coverage Results" MODIFIED="1748170727305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_prep.coverage" NAME="stage1 Coverage Results" MODIFIED="1747991662712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
