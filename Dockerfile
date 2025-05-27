@@ -2,10 +2,10 @@ FROM python:3.9-slim
 
 # Install system deps
 RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    git \
     build-essential \
+    curl \
+    git \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
