@@ -54,7 +54,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo "🧪 Stage 2: Run comprehensive tests"
+                echo "🧪 Stage 2: Run tests"
 
                 // Unit Tests with Coverage
                 bat '''
@@ -62,7 +62,7 @@ pipeline {
                       -v "%WORKSPACE%:/app" ^
                       -w /app ^
                       %DOCKER_IMAGE%:%DOCKER_TAG% ^
-                      pip install coverage xmlrunner && coverage run --source=. --omit="*/tests/*,*/test_*,*/__pycache__/*,*/venv/*" -m xmlrunner discover -s tests/unit -o test-results
+                      bash -c "coverage run --source=. --omit=*/tests/*,*/test_*,*/__pycache__/*,*/venv/* -m xmlrunner discover -s tests/unit -o test-results"
                 '''
 
                 // Generate coverage reports
