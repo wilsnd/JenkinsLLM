@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Unit test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/test_data_flow.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_data_flow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/integration/test_full_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_full_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/performance/test_gpu_efficiency.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/performance/test_inference_speed.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/performance/test_training_speed.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/security/test_input_validation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/security/test_model_safety.py" beforeDir="false" />
-    </list>
+    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -260,7 +249,7 @@
       <workItem from="1748146545235" duration="34472000" />
       <workItem from="1748189388231" duration="10615000" />
       <workItem from="1748234516462" duration="29564000" />
-      <workItem from="1748318300995" duration="5980000" />
+      <workItem from="1748318300995" duration="6346000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -334,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748320765952</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Tests">
+      <option name="closed" value="true" />
+      <created>1748324529362</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748324529362</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,12 +350,13 @@
     <MESSAGE value="Jenkins" />
     <MESSAGE value="Test cases" />
     <MESSAGE value="Unit test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unit test" />
+    <MESSAGE value="Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/JenkinsLLM$english.coverage" NAME="english Coverage Results" MODIFIED="1747981881983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1_2.coverage" NAME="stage1+2 Coverage Results" MODIFIED="1748065904369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748323859798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/integration" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748324719167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/integration" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748103903204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$api_server.coverage" NAME="api_server Coverage Results" MODIFIED="1748170727305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_prep.coverage" NAME="stage1 Coverage Results" MODIFIED="1747991662712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
