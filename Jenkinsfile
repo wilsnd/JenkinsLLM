@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        hudson.plugins.sonar.SonarRunnerInstallation 'SonarScanner'
-    }
-
     environment {
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG   = "${env.BUILD_NUMBER}"
@@ -55,8 +51,11 @@ pipeline {
         stage('Quality') {
             steps {
                 echo "🔎 Stage 3: Code Quality"
-                withSonarQubeEnv('SonarQube') {
-                    bat 'sonar-scanner'
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv('SonarQube') {
+                        bat "${scannerHome}\\bin\\sonar-scanner.bat"
+                    }
                 }
                 waitForQualityGate abortPipeline: true
             }
