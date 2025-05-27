@@ -70,8 +70,6 @@ pipeline {
         }
     }
 
-    }
-
     post {
         always {
             echo "🧹 Cleanup"
