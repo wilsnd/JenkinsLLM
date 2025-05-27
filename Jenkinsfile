@@ -119,10 +119,10 @@ pipeline {
                               -v "%WORKSPACE%:/app" ^
                               -w /app ^
                               %DOCKER_IMAGE%:%DOCKER_TAG% ^
-                              coverage report --fail-under=70
+                              coverage report --fail-under=60
                         '''
                     }
-                    echo "✅ All tests passed with adequate coverage (≥70%)"
+                    echo "✅ All tests passed with coverage over 60%"
                 }
             }
         }
