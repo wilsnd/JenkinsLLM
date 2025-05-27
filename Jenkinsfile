@@ -57,7 +57,16 @@ pipeline {
                         bat "${scannerHome}\\bin\\sonar-scanner.bat"
                     }
                 }
-                waitForQualityGate abortPipeline: true
+                timeout(time: 10, unit: 'MINUTES') {
+                    script {
+                        def qg = waitForQualityGate()
+                        echo "Quality Gate status: ${qg.status}"
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                        echo "✅ Quality gate passed"
+                    }
+                }
             }
         }
     }
