@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     environment {
+        // Docker settings
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG = "${env.BUILD_NUMBER}"
 
+        // Quality gate thresholds
         MIN_COVERAGE = "70"
         MAX_CRITICAL_ISSUES = "0"
         MAX_MAJOR_ISSUES = "5"
