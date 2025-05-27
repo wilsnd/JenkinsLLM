@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarScanner 'SonarScanner'
-    }
-
     environment {
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG   = "${env.BUILD_NUMBER}"
