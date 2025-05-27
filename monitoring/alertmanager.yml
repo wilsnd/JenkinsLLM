@@ -1,0 +1,16 @@
+global:
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'wilsondju@gmail.com'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'web.hook'
+
+receivers:
+  - name: 'web.hook'
+    webhook_configs:
+      - url: 'http://host.docker.internal:8080/jenkins'
+        title: 'El El M Alert'

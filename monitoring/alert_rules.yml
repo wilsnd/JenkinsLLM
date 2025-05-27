@@ -1,0 +1,20 @@
+groups:
+  - name: jenkins-llm-alerts
+    rules:
+      - alert: ApplicationDown
+        expr: up{job="jenkins-llm-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "El El M is down"
+          description: "The El El M application down for more than 1 minute EMERGENCY!!!"
+
+      - alert: HighResponseTime
+        expr: http_request_duration_seconds{quantile="0.95"} > 2
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is above 2 seconds"
