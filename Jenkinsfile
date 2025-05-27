@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        sonarScanner 'SonarScanner'
+    }
+
     environment {
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG   = "${env.BUILD_NUMBER}"
@@ -50,6 +54,22 @@ pipeline {
                 }
             }
         }
+        stage('Quality Check') {
+            steps {
+                echo "🔎  Stage 3: Code Quality with SonarQube"
+                withSonarQubeEnv('SonarQube') {
+                    bat 'sonar-scanner'
+                }
+            }
+            post {
+                failure {
+                    echo "❌  Sonar analysis failed"
+                    error("Quality check failed")
+                }
+            }
+        }
+    }
+
     }
 
     post {
