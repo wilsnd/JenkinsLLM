@@ -30,19 +30,19 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo "🧪 Stage 2: Run tests inside container"
+                echo "🧪 Stage 2: Run tests"
                 bat """
-                    docker run --rm ^
-                      -v "%WORKSPACE%:/app" ^
-                      -w /app ^
-                      %DOCKER_IMAGE%:%DOCKER_TAG% ^
-                      python -m unittest tests/unit/ -v --junitxml=test-results.xml
+                  docker run --rm ^
+                    -v "%WORKSPACE%:/app" ^
+                    -w /app ^
+                    %DOCKER_IMAGE%:%DOCKER_TAG% ^
+                    python -m xmlrunner discover -s tests/unit -o test-results
                 """
             }
             post {
                 always {
-                    echo "🔍 Publishing JUnit results"
-                    junit 'test-results.xml'
+                    echo "🔍 Publishing results"
+                    junit 'test-results/*.xml'
                 }
                 failure {
                     echo "❌ Tests failed"
