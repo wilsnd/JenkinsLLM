@@ -12,7 +12,7 @@ pipeline {
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
-        timeout(time: 20, unit: 'MINUTES')
+        timeout(time: 60, unit: 'MINUTES')
         timestamps()
     }
 
@@ -20,9 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "🏗️ Stage 1: Build Docker image"
-                bat """
-                    docker build -t "%DOCKER_IMAGE%:%DOCKER_TAG%" .
-                """
+                bat "docker build -t \"%DOCKER_IMAGE%:%DOCKER_TAG%\" ."
             }
             post {
                 failure {
@@ -35,17 +33,16 @@ pipeline {
         stage('Test') {
             steps {
                 echo "🧪 Stage 2: Run tests"
-                bat """
-                  docker run --rm ^
-                    -v "%WORKSPACE%:/app" ^
-                    -w /app ^
-                    %DOCKER_IMAGE%:%DOCKER_TAG% ^
-                    python -m xmlrunner discover -s tests/unit -o test-results
-                """
+                bat '''
+                    docker run --rm ^
+                      -v "%WORKSPACE%:/app" ^
+                      -w /app ^
+                      %DOCKER_IMAGE%:%DOCKER_TAG% ^
+                      python -m xmlrunner discover -s tests/unit -o test-results
+                '''
             }
             post {
                 always {
-                    echo "🔍 Publishing results"
                     junit 'test-results/*.xml'
                 }
                 failure {
@@ -54,31 +51,24 @@ pipeline {
                 }
             }
         }
-        stage('Quality Check') {
+
+        stage('Quality') {
             steps {
-                echo "🔎  Stage 3: Code Quality with SonarQube"
+                echo "🔎 Stage 3: Code Quality"
                 withSonarQubeEnv('SonarQube') {
                     bat 'sonar-scanner'
                 }
-            }
-            post {
-                failure {
-                    echo "❌  Sonar analysis failed"
-                    error("Quality check failed")
-                }
+                waitForQualityGate abortPipeline: true
             }
         }
     }
 
     post {
         always {
-            echo "🧹 Cleanup"
-            bat """
-                docker rmi "%DOCKER_IMAGE%:%DOCKER_TAG%" || exit 0
-            """
+            bat "docker rmi \"%DOCKER_IMAGE%:%DOCKER_TAG%\" || exit 0"
         }
         success {
-            echo "🎉 Pipeline completed!"
+            echo "🎉 Pipeline completed successfully!"
         }
         failure {
             echo "🚨 Pipeline failed."
