@@ -10,7 +10,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG   = "${env.BUILD_NUMBER}"
-        NOTIFICATION_EMAIL = "${params.NOTIFICATION_EMAIL ?: env.CHANGE_AUTHOR_EMAIL ?: 'admin@example.com'}"
+        NOTIFICATION_EMAIL = "${params.NOTIFICATION_EMAIL ?: env.CHANGE_AUTHOR_EMAIL ?: 'wilsondju@gmail.com'}"
     }
 
     options {
