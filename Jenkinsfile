@@ -7,10 +7,6 @@ pipeline {
         string(name: 'NOTIFICATION_EMAIL', defaultValue: '', description: 'Override notification email')
     }
 
-    tools {
-        sonarRunner 'SonarScanner'
-    }
-
     environment {
         DOCKER_IMAGE = "jenkins-llm"
         DOCKER_TAG   = "${env.BUILD_NUMBER}"
