@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     environment {
-        // Docker settings
         DOCKER_IMAGE = "jenkins-llm"
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        DOCKER_TAG   = "${env.BUILD_NUMBER}"
     }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
-        timeout(time: 20, unit: 'MINUTES')
+        timeout(time: 60, unit: 'MINUTES')
         timestamps()
     }
 
@@ -18,13 +17,8 @@ pipeline {
             steps {
                 script {
                     echo "🏗️ Building Docker image"
-
-                    // Build Docker image
-                    def image = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-
-                    // Tag as latest
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                     sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
-
                     echo "✅ Build completed successfully"
                 }
             }
@@ -42,8 +36,7 @@ pipeline {
                     steps {
                         script {
                             echo "🧪 Running Unit Tests"
-
-                            docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside() {
+                            docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
                                 sh '''
                                     cd /app
                                     python -m pytest tests/unit/ -v \
@@ -67,8 +60,7 @@ pipeline {
                     steps {
                         script {
                             echo "🔧 Running Integration Tests"
-
-                            docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside() {
+                            docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
                                 sh '''
                                     cd /app
                                     python run_integration_tests.py
@@ -92,8 +84,10 @@ pipeline {
                     echo "✅ All tests passed"
                 }
                 failure {
-                    echo "❌ Tests failed - pipeline stopped"
-                    currentBuild.result = 'FAILURE'
+                    script {
+                        echo "❌ Tests failed - pipeline stopped"
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
@@ -109,11 +103,9 @@ pipeline {
                 '''
             }
         }
-
         success {
             echo "🎉 Pipeline completed successfully!"
         }
-
         failure {
             echo "❌ Pipeline failed at stage: ${env.STAGE_NAME}"
         }
