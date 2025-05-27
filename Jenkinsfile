@@ -36,7 +36,7 @@ pipeline {
                       -v "%WORKSPACE%:/app" ^
                       -w /app ^
                       %DOCKER_IMAGE%:%DOCKER_TAG% ^
-                      python -m pytest tests/unit/ -v --junitxml=test-results.xml
+                      python -m unittest tests/unit/ -v --junitxml=test-results.xml
                 """
             }
             post {
