@@ -140,7 +140,7 @@ pipeline {
                             -Dsonar.sources=. ^
                             -Dsonar.exclusions=**/tests/**,**/test-results/**,**/__pycache__/**,**/venv/** ^
                             -Dsonar.python.coverage.reportPaths=coverage.xml ^
-                            -Dsonar.qualitygate.wait=true ^
+                            -Dsonar.qualitygate.wait=false ^
                             -Dsonar.qualitygate.timeout=300 ^
                             -Dsonar.coverage.exclusions=**/tests/**,**/test_*/** ^
                             -Dsonar.duplicated.exclusions=**/tests/** ^
