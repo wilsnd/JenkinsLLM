@@ -1,6 +1,9 @@
 import json
 from tqdm import tqdm
-from config import get_preparation_config
+try:
+    from config import get_preparation_config
+except ImportError:
+    from .config import get_preparation_config
 
 
 def words_to_ids(words, vocab):

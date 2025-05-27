@@ -7,10 +7,14 @@ from multiprocessing import Pool, cpu_count
 import tempfile
 from collections import deque
 
-from content_validation import load_english_words, is_good, quality_check
-from web_cleaner import remove_web_boilerplate
-from deduplicator import ContentDeduplicator
-
+try:
+    from .content_validation import load_english_words, is_good, quality_check
+    from .web_cleaner import remove_web_boilerplate
+    from .deduplicator import ContentDeduplicator
+except ImportError:
+    from content_validation import load_english_words, is_good, quality_check
+    from web_cleaner import remove_web_boilerplate
+    from deduplicator import ContentDeduplicator
 
 def process_file(wet_file, out, english_words, config=None):
     """Process single WET file"""
@@ -138,4 +142,4 @@ def preprocess(input_dir, output_file, num_files=None, config=None):
 
 
 if __name__ == '__main__':
-    preprocess("../data/CC_data", "../processed_data/cleaned_data.txt", 50)
+    preprocess("../data/CC_data", "../processed_data/cleaned_data.txt", 2)

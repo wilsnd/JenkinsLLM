@@ -4,15 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Jenkins">
-      <change afterPath="$PROJECT_DIR$/tests/unit/mock_data/test_val.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/test_clean.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/unit/test_prepare.py" afterDir="false" />
+    <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Test cases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/test_data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/mock_data/test_train.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cleaning/cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleaning/cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cleaning/content_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleaning/content_validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cleaning/deduplicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleaning/deduplicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cleaning/web_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleaning/web_cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/batch_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/batch_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/flask_web.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/flask_web.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparation/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/preparation/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparation/convert_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/preparation/convert_id.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparation/prepare.py" beforeDir="false" afterPath="$PROJECT_DIR$/preparation/prepare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparation/tokenization.py" beforeDir="false" afterPath="$PROJECT_DIR$/preparation/tokenization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/test_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/test_deployment.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_data_flow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/test_full_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_full_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_clean.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_clean.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/test_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_memory.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/unit/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unit/test_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_prepare.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit/test_prepare.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,16 +77,31 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_clean.TestCleaning.executor": "Run",
+    "Python tests.Python tests for test_clean.TestCleaning.test_deduplicator_debug.executor": "Run",
+    "Python tests.Python tests for test_clean.TestCleaning.test_edge_cases.executor": "Run",
+    "Python tests.Python tests for test_clean.TestCleaning.test_quality_check.executor": "Run",
+    "Python tests.Python tests for test_clean.TestConfig.test_get_cleaning_config_returns_copy.executor": "Run",
+    "Python tests.Python tests for test_clean.TestPatterns.executor": "Run",
+    "Python tests.Python tests for test_full_pipeline.TestFullPipeline.test_01_data_preparation_pipeline.executor": "Run",
     "Python tests.Python tests for test_inference.test_batch_inference_basic.executor": "Run",
     "Python tests.Python tests for test_inference.test_text_generator_basic.executor": "Run",
     "Python tests.Python tests for test_training.test_training_pipeline.executor": "Run",
     "Python tests.Python tests in data_prep.py.executor": "Run",
+    "Python tests.Python tests in test_clean.py (1).executor": "Run",
+    "Python tests.Python tests in test_clean.py.executor": "Run",
+    "Python tests.Python tests in test_full_pipeline.py.executor": "Run",
     "Python tests.Python tests in test_inference.py.executor": "Run",
+    "Python tests.Python tests in test_model.py.executor": "Run",
+    "Python tests.Python tests in test_prepare.py.executor": "Run",
     "Python tests.Python tests in test_training.py.executor": "Run",
+    "Python.__init__ (1).executor": "Run",
+    "Python.__init__.executor": "Run",
     "Python.api_server.executor": "Run",
     "Python.batch_inference.executor": "Run",
     "Python.cleaner.executor": "Run",
     "Python.config.executor": "Run",
+    "Python.content_validation.executor": "Run",
     "Python.convert_id.executor": "Run",
     "Python.data_prep.executor": "Run",
     "Python.data_split.executor": "Run",
@@ -87,6 +113,7 @@
     "Python.prepare.executor": "Run",
     "Python.preprocessing (1).executor": "Run",
     "Python.preprocessing.executor": "Run",
+    "Python.pytest.executor": "Run",
     "Python.split.executor": "Run",
     "Python.stage1+2.executor": "Run",
     "Python.stage1.executor": "Run",
@@ -105,7 +132,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -122,53 +149,37 @@
       <recent name="C:\Users\dirty\PycharmProjects\JenkinsLLM\tests\unit" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in test_inference.py">
-    <configuration name="Python tests for test_inference.test_batch_inference_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests in test_full_pipeline.py">
+    <configuration name="Python tests for test_full_pipeline.TestFullPipeline.test_01_data_preparation_pipeline" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/integration" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_inference.test_batch_inference_basic&quot;" />
+      <option name="_new_target" value="&quot;test_full_pipeline.TestFullPipeline.test_01_data_preparation_pipeline&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_inference.test_text_generator_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in test_full_pipeline.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/integration" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_inference.test_text_generator_basic&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_training.test_training_pipeline" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="JenkinsLLM" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_training.test_training_pipeline&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/integration/test_full_pipeline.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests in test_inference.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -187,7 +198,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_training.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in test_model.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JenkinsLLM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -199,17 +210,33 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/unit/test_training.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/unit/test_model.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_prepare.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="JenkinsLLM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/unit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/unit/test_prepare.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests in test_full_pipeline.py" />
+        <item itemvalue="Python tests.Python tests for test_full_pipeline.TestFullPipeline.test_01_data_preparation_pipeline" />
         <item itemvalue="Python tests.Python tests in test_inference.py" />
-        <item itemvalue="Python tests.Python tests for test_inference.test_text_generator_basic" />
-        <item itemvalue="Python tests.Python tests for test_inference.test_batch_inference_basic" />
-        <item itemvalue="Python tests.Python tests in test_training.py" />
-        <item itemvalue="Python tests.Python tests for test_training.test_training_pipeline" />
+        <item itemvalue="Python tests.Python tests in test_model.py" />
+        <item itemvalue="Python tests.Python tests in test_prepare.py" />
       </list>
     </recent_temporary>
   </component>
@@ -238,7 +265,8 @@
       <workItem from="1748057431223" duration="40217000" />
       <workItem from="1748146545235" duration="34472000" />
       <workItem from="1748189388231" duration="10615000" />
-      <workItem from="1748234516462" duration="10278000" />
+      <workItem from="1748234516462" duration="29564000" />
+      <workItem from="1748318300995" duration="2290000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -296,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748238812715</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Test cases">
+      <option name="closed" value="true" />
+      <created>1748248442989</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748248442989</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,33 +349,38 @@
     <MESSAGE value="Commit 5" />
     <MESSAGE value="WEB AND 9H LLM WORKING" />
     <MESSAGE value="Jenkins" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jenkins" />
+    <MESSAGE value="Test cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test cases" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/JenkinsLLM$english.coverage" NAME="english Coverage Results" MODIFIED="1747981881983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1_2.coverage" NAME="stage1+2 Coverage Results" MODIFIED="1748065904369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748247987107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/unit" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$.coverage" NAME=" Coverage Results" MODIFIED="1748320239259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/integration" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$vocabularize.coverage" NAME="vocabularize Coverage Results" MODIFIED="1748103903204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$api_server.coverage" NAME="api_server Coverage Results" MODIFIED="1748170727305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_prep.coverage" NAME="stage1 Coverage Results" MODIFIED="1747991662712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$config.coverage" NAME="config Coverage Results" MODIFIED="1748193874460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$test.coverage" NAME="test Coverage Results" MODIFIED="1748099268802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/old_files" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$prepare.coverage" NAME="prepare Coverage Results" MODIFIED="1748189439031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preparation" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$__init____1_.coverage" NAME="__init__ (1) Coverage Results" MODIFIED="1748268325813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/training" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$batch_inference.coverage" NAME="batch_inference Coverage Results" MODIFIED="1748227938104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage3.coverage" NAME="stage3 Coverage Results" MODIFIED="1748069435623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$convert_id.coverage" NAME="convert_id Coverage Results" MODIFIED="1748191630657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preparation" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$gradio_demo.coverage" NAME="gradio_demo Coverage Results" MODIFIED="1748170346513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$flask_web.coverage" NAME="flask_web Coverage Results" MODIFIED="1748231298928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$flask_web.coverage" NAME="flask_web Coverage Results" MODIFIED="1748253484534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$tokenization.coverage" NAME="tokenization Coverage Results" MODIFIED="1748103780254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$content_validation.coverage" NAME="content_validation Coverage Results" MODIFIED="1748269552042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cleaning" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1748268521996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/training" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_validator.coverage" NAME="data_validator Coverage Results" MODIFIED="1748166648675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preparation" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$flask_web__1_.coverage" NAME="flask_web (1) Coverage Results" MODIFIED="1748185503503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/inference" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing.coverage" NAME="preprocessing Coverage Results" MODIFIED="1748103612641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$preprocessing__1_.coverage" NAME="preprocessing (1) Coverage Results" MODIFIED="1748091930230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage1.coverage" NAME="stage1 Coverage Results" MODIFIED="1748060457895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$stage2.coverage" NAME="stage2 Coverage Results" MODIFIED="1748064600950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1748268070984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cleaning" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$train_model.coverage" NAME="train_model Coverage Results" MODIFIED="1748194014496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$split.coverage" NAME="split Coverage Results" MODIFIED="1748078026294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JenkinsLLM$data_split.coverage" NAME="data_split Coverage Results" MODIFIED="1748103842971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_processing" />
-    <SUITE FILE_PATH="coverage/JenkinsLLM$cleaner.coverage" NAME="cleaner Coverage Results" MODIFIED="1748160745125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cleaning" />
+    <SUITE FILE_PATH="coverage/JenkinsLLM$cleaner.coverage" NAME="cleaner Coverage Results" MODIFIED="1748270829751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cleaning" />
   </component>
 </project>

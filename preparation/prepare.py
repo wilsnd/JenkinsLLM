@@ -1,9 +1,16 @@
 import os
-from tokenization import tokenize
-from vocabularize import build_vocabulary
-from convert_id import convert_to_id
-from data_split import split_data
-from data_validator import validate_all
+try:
+    from tokenization import tokenize
+    from vocabularize import build_vocabulary
+    from convert_id import convert_to_id
+    from data_split import split_data
+    from data_validator import validate_all
+except ImportError:
+    from .tokenization import tokenize
+    from .vocabularize import build_vocabulary
+    from .convert_id import convert_to_id
+    from .data_split import split_data
+    from .data_validator import validate_all
 
 
 def prepare_data(input_file, output_dir="../processed_data", min_freq=250):

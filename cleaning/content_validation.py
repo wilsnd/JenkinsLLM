@@ -1,5 +1,7 @@
-from patterns import WORD_PATTERN, SENTENCE_PATTERN, PRINTABLE_PATTERN, LATIN_ALPHA
-
+try:
+    from .patterns import WORD_PATTERN, SENTENCE_PATTERN, PRINTABLE_PATTERN, LATIN_ALPHA
+except ImportError:
+    from patterns import WORD_PATTERN, SENTENCE_PATTERN, PRINTABLE_PATTERN, LATIN_ALPHA
 
 def load_english_words():
     """Load English words from english_words.txt"""
@@ -35,8 +37,11 @@ def is_valid_encoding(text, config=None):
 def is_good(text, english_words, config=None):
     """Stage 1 cleaning"""
     if config is None:
-        from config import get_cleaning_config
+        from .config import get_cleaning_config
         config = get_cleaning_config()
+
+    if not text:
+        return False
 
     # Check length
     text_len = len(text)
@@ -47,12 +52,7 @@ def is_good(text, english_words, config=None):
     if not is_valid_encoding(text, config):
         return False
 
-    if isinstance(text, str):
-        text_bytes = text.encode('utf-8', errors='ignore')
-        text_lower = text.lower()
-    else:
-        text_bytes = text
-        text_lower = text.decode('utf-8', errors='ignore').lower()
+    text_len = len(text)
 
     # Check based on latin character
     latin_chars = sum(1 for char in text if char in LATIN_ALPHA)
@@ -81,10 +81,10 @@ def is_good(text, english_words, config=None):
 def quality_check(text, config=None):
     """Stage 2 cleaning"""
     if config is None:
-        from config import get_cleaning_config
+        from .config import get_cleaning_config
         config = get_cleaning_config()
 
-    if len(text) < config["min_text_length"]:
+    if not text or len(text) < config["min_text_length"]:
         return False
 
     # Split text
@@ -100,8 +100,6 @@ def quality_check(text, config=None):
             # Count content lines in same loop
             if len(stripped) > 40 and ' ' in stripped and not stripped.isupper():
                 content_lines += 1
-
-    stripped_len = len(stripped_lines)
 
     # Check line diversity
     if len(stripped_lines) >= 5:

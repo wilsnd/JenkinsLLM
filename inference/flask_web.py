@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
-from generator import TextGenerator
+try:
+    from .generator import TextGenerator
+except ImportError:
+    from generator import TextGenerator
 
 
 def start_demo(model_path="../models/all_models/latest.pt", vocab_path="../processed_data/vocabulary.json"):

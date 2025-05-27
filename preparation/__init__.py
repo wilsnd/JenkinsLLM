@@ -4,6 +4,7 @@ from .convert_id import convert_to_id
 from .data_split import split_data
 from .data_validator import DataValidator, validate_all
 from .prepare import prepare_data
+from .config import get_preparation_config
 
 __version__ = "1.0.0"
 
@@ -14,7 +15,8 @@ __all__ = [
     "split_data",
     "DataValidator",
     "validate_all",
-    "prepare_data"
+    "prepare_data",
+    "get_preparation_config"
 ]
 
 

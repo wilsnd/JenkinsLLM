@@ -31,7 +31,10 @@ def tokenize(input_file, output_file):
 
     print(f"Documents: {len(documents):,}")
     print(f"Total words: {total_words:,}")
-    print(f"Average words per doc: {total_words / len(documents):.1f}")
+    if len(documents) > 0:
+        print(f"Average words per doc: {total_words / len(documents):.1f}")
+    else:
+        print("Average words per doc: 0.0")
     print(f"Saved to: {output_file}")
 
 

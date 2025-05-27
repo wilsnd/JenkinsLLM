@@ -1,7 +1,10 @@
 import json
 import torch
 from tqdm import tqdm
-from generator import TextGenerator
+try:
+    from .generator import TextGenerator
+except ImportError:
+    from generator import TextGenerator
 
 
 class BatchInference:
