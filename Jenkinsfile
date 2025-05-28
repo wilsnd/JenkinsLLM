@@ -324,14 +324,14 @@ pipeline {
                 echo "🚀 Stage 5: Deploy to Test Environment"
 
                 // Simple cleanup
-                bat "docker stop jenkins-llm-test || echo No container"
-                bat "docker rm jenkins-llm-test || echo No container"
+                bat "docker stop jenkins-llm || echo No container"
+                bat "docker rm jenkins-llm || echo No container"
 
-                // Deploy (FIXED)
-                bat "docker run -d --name jenkins-llm-test -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                // Deploy 
+                bat "docker run -d --name jenkins-llm -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
 
                 // Verify
-                bat "docker ps | findstr jenkins-llm-test"
+                bat "docker ps | findstr jenkins-llm"
 
                 // Wait and test
                 bat "timeout /t 20 /nobreak"
@@ -341,7 +341,7 @@ pipeline {
             }
             post {
                 always {
-                    bat "docker logs jenkins-llm-test > logs.txt || echo No logs > logs.txt"
+                    bat "docker logs jenkins-llm > logs.txt || echo No logs > logs.txt"
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
             }
@@ -653,8 +653,8 @@ pipeline {
             // Cleanup
             script {
                 bat '''
-                    docker stop jenkins-llm-test jenkins-llm-prod 2>nul || echo "Containers not running"
-                    docker rm jenkins-llm-test jenkins-llm-prod 2>nul || echo "Containers not found"
+                    docker stop jenkins-llm jenkins-llm-prod 2>nul || echo "Containers not running"
+                    docker rm jenkins-llm jenkins-llm-prod 2>nul || echo "Containers not found"
                 '''
             }
         }
