@@ -2,6 +2,7 @@ FROM python:3.9-slim
 
 # Install system deps
 RUN apt-get update && apt-get install -y \
+    bash \
     build-essential \
     curl \
     git \
@@ -10,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy requirements
+# Requirements
 COPY requirements.txt .
 
 # Install Python deps
@@ -19,8 +20,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the project code
 COPY . .
 
-# Create dir
-RUN mkdir -p /models/all_models /processed_data /app/monitoring /app/logs /app/test-results
+# Create directories
+RUN mkdir -p /app/models/all_models \
+             /app/processed_data \
+             /app/monitoring \
+             /app/logs \
+             /app/test-results
 
 # Set the environment variables
 ENV PYTHONPATH=/app

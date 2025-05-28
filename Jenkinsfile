@@ -323,26 +323,82 @@ pipeline {
             steps {
                 echo "🚀 Stage 5: Deploy to Test Environment"
 
-                // Simple cleanup
-                bat "docker stop jenkins-llm || echo No container"
-                bat "docker rm jenkins-llm || echo No container"
+                script {
+                    // Clean up any existing container
+                    bat '''
+                        docker stop jenkins-llm 2>nul || echo "No existing container to stop"
+                        docker rm jenkins-llm 2>nul || echo "No existing container to remove"
+                    '''
 
-                // Deploy
-                bat "docker run -d --name jenkins-llm -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                    // Deploy new container
+                    bat """
+                        docker run -d ^
+                          --name jenkins-llm ^
+                          -p 5001:5000 ^
+                          -e ENVIRONMENT=test ^
+                          -e LOG_LEVEL=DEBUG ^
+                          ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
+                    """
 
-                // Verify
-                bat "docker ps | findstr jenkins-llm"
+                    // Verify deployment
+                    bat "docker ps | findstr jenkins-llm"
 
-                // Wait and test
-                bat "timeout /t 20 /nobreak"
-                bat "curl -f http://localhost:5001/health"
+                    // Wait for container to be ready
+                    echo "Waiting for container to start..."
+                    bat "timeout /t 30 /nobreak"
 
-                echo "✅ Deploy successful!"
+                    // Health check
+                    script {
+                        def maxRetries = 10
+                        def retryCount = 0
+                        def healthy = false
+
+                        while (retryCount < maxRetries && !healthy) {
+                            healthy = bat(
+                                script: "curl -f http://localhost:5001/health",
+                                returnStatus: true
+                            ) == 0
+
+                            if (!healthy) {
+                                echo "Health check attempt ${retryCount + 1}/${maxRetries} failed, retrying..."
+                                bat "timeout /t 5 /nobreak"
+                                retryCount++
+                            }
+                        }
+
+                        if (!healthy) {
+                            error("Container failed to become healthy after ${maxRetries} attempts")
+                        }
+                    }
+
+                    echo "✅ Deploy successful!"
+                }
             }
             post {
                 always {
-                    bat "docker logs jenkins-llm > logs.txt || echo No logs > logs.txt"
+                    script {
+                        // Safely get logs
+                        def containerExists = bat(
+                            script: "docker ps -a --format \"{{.Names}}\" | findstr /B jenkins-llm",
+                            returnStatus: true
+                        ) == 0
+
+                        if (containerExists) {
+                            bat "docker logs jenkins-llm > logs.txt 2>&1"
+                        } else {
+                            writeFile file: 'logs.txt', text: 'No container logs available'
+                        }
+                    }
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
+                }
+                failure {
+                    script {
+                        // Cleanup on failure
+                        bat '''
+                            docker stop jenkins-llm 2>nul || echo "Nothing to stop"
+                            docker rm jenkins-llm 2>nul || echo "Nothing to remove"
+                        '''
+                    }
                 }
             }
         }

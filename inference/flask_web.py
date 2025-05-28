@@ -18,10 +18,25 @@ GENERATION_COUNT = Counter('text_generations_total', 'Total text generations', [
 GENERATION_DURATION = Histogram('text_generation_duration_seconds', 'Text generation duration')
 
 
-def create_app(model_path="../models/all_models/latest.pt", vocab_path="../processed_data/vocabulary.json"):
+def create_app(model_path=None, vocab_path=None):
     """Create Flask webapp"""
     app = Flask(__name__)
     CORS(app)
+
+    # Use correct default paths
+    if model_path is None:
+        model_path = "/app/models/all_models/latest.pt"
+    if vocab_path is None:
+        vocab_path = "/app/processed_data/vocabulary.json"
+
+    # Or use relative paths from /app/inference/
+    model_path = "../models/all_models/latest.pt"
+    vocab_path = "../processed_data/vocabulary.json"
+
+    print(f"Model path: {model_path}")
+    print(f"Vocab path: {vocab_path}")
+    print(f"Model exists: {os.path.exists(model_path)}")
+    print(f"Vocab exists: {os.path.exists(vocab_path)}")
 
     # Initialize generator
     try:
@@ -321,7 +336,7 @@ def create_app(model_path="../models/all_models/latest.pt", vocab_path="../proce
     return app
 
 
-def start_demo(model_path="../models/all_models/latest.pt", vocab_path="../processed_data/vocabulary.json", port=5000):
+def start_demo(model_path="/app/models/all_models/latest.pt", vocab_path="/app/processed_data/vocabulary.json", port=5000):
     """Start Flask"""
     app = create_app(model_path, vocab_path)
 

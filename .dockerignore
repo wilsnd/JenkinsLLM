@@ -1,8 +1,15 @@
 # Heavy folders
 data/
-processed_data/
-!processed_data/vocabulary.json
 old_files/
+
+# Model files
+models/**/*.pt
+models/**/*.pth
+!models/all_models/latest.pt
+
+# Processed data
+processed_data/**
+!processed_data/vocabulary.json
 
 # Python cache
 __pycache__/
