@@ -323,96 +323,26 @@ pipeline {
             steps {
                 echo "🚀 Stage 5: Deploy to Test Environment"
 
-                script {
-                    def deploymentName = "jenkins-llm-test"
-                    def testPort = "5001"
-                    def healthCheckUrl = "http://localhost:${testPort}"
+                // Simple cleanup
+                bat "docker stop jenkins-llm-test || echo No container"
+                bat "docker rm jenkins-llm-test || echo No container"
 
-                    // Stop existing test deployment
-                    bat "docker stop ${deploymentName} 2>nul || echo No existing container to stop"
-                    bat "docker rm ${deploymentName} 2>nul || echo No existing container to remove"
+                // Deploy (FIXED)
+                bat "docker run -d --name jenkins-llm-test -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
 
-                    // Deploy to test environment - FIXED: Remove problematic health check parameters
-                    bat "docker run -d --name ${deploymentName} -p ${testPort}:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                // Verify
+                bat "docker ps | findstr jenkins-llm-test"
 
-                    // Verify container is running
-                    bat "docker ps | findstr ${deploymentName}"
+                // Wait and test
+                bat "timeout /t 20 /nobreak"
+                bat "curl -f http://localhost:5001/health"
 
-                    // Wait for deployment to be ready
-                    echo "⏳ Waiting for deployment to be ready..."
-                    bat "timeout /t 15 /nobreak"
-
-                    // Test health endpoint
-                    timeout(time: 5, unit: 'MINUTES') {
-                        waitUntil {
-                            script {
-                                def result = bat(
-                                    script: "curl -f ${healthCheckUrl}/health --max-time 10",
-                                    returnStatus: true
-                                )
-                                if (result != 0) {
-                                    echo "Health check failed, retrying..."
-                                    bat "docker logs ${deploymentName} --tail 10"
-                                }
-                                return result == 0
-                            }
-                        }
-                    }
-
-                    // API functionality test
-                    bat "curl -X POST ${healthCheckUrl}/generate -H \"Content-Type: application/json\" -d \"{\\\"prompt\\\": \\\"test\\\"}\" -o api-test-result.json"
-
-                    // Validate API response
-                    if (fileExists('api-test-result.json')) {
-                        try {
-                            def apiResult = readJSON file: 'api-test-result.json'
-                            if (apiResult.result) {
-                                echo "✅ API test successful: Generated text received"
-                            } else if (apiResult.error) {
-                                echo "⚠️ API returned error: ${apiResult.error}"
-                            } else {
-                                echo "⚠️ API test: Unexpected response format"
-                            }
-                        } catch (Exception e) {
-                            echo "⚠️ API response validation failed: ${e.message}"
-                        }
-                    }
-
-                    // Create deployment report
-                    def deploymentInfo = [
-                        buildNumber: env.BUILD_NUMBER,
-                        deploymentName: deploymentName,
-                        imageTag: "${env.DOCKER_IMAGE}:${env.DOCKER_TAG}",
-                        environment: 'test',
-                        port: testPort,
-                        timestamp: new Date().toString(),
-                        healthCheckUrl: healthCheckUrl,
-                        status: 'deployed'
-                    ]
-
-                    writeJSON file: 'deployment-info.json', json: deploymentInfo
-
-                    echo "✅ Deployment to test environment successful!"
-                    echo "🌐 Application accessible at: ${healthCheckUrl}"
-                    echo "📋 Container name: ${deploymentName}"
-                }
+                echo "✅ Deploy successful!"
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'deployment-info.json,api-test-result.json', allowEmptyArchive: true
-
-                    script {
-                        // Get container logs for debugging - FIXED: Remove problematic redirection
-                        bat "docker logs jenkins-llm-test > deployment-logs.txt || echo No logs available > deployment-logs.txt"
-                    }
-                    archiveArtifacts artifacts: 'deployment-logs.txt', allowEmptyArchive: true
-                }
-                failure {
-                    script {
-                        echo "❌ Deploy stage failed, cleaning up..."
-                        bat "docker stop jenkins-llm-test || echo Container already stopped"
-                        bat "docker rm jenkins-llm-test || echo Container already removed"
-                    }
+                    bat "docker logs jenkins-llm-test > logs.txt || echo No logs > logs.txt"
+                    archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
             }
         }
