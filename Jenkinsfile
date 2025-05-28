@@ -321,53 +321,26 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "🚀 Stage 5: Deploy to Test Environment"
-
                 script {
-                    // Clean up any existing container
-                    bat '''
-                        docker stop jenkins-llm 2>nul || echo "No existing container to stop"
-                        docker rm jenkins-llm 2>nul || echo "No existing container to remove"
-                    '''
+                    echo "🚀 Deploying test container"
+                    // Remove old container
+                    bat "docker rm -f jenkins-llm || exit 0"
 
-                    // Deploy new container
-                    bat """
-                        docker run -d ^
-                          --name jenkins-llm ^
-                          -p 5001:5000 ^
-                          -e ENVIRONMENT=test ^
-                          -e LOG_LEVEL=DEBUG ^
-                          ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
-                    """
+                    // Run
+                    bat """docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"""
 
-                    // Verify deployment
-                    bat "docker ps | findstr jenkins-llm"
+                    // Quick verify
+                    bat "docker ps --filter name=jenkins-llm"
 
-                    // Wait for container to be ready
-                    echo "Waiting for container to start..."
-                    bat "timeout /t 30 /nobreak"
-
-                    // Health check
-                    script {
-                        def maxRetries = 10
-                        def retryCount = 0
-                        def healthy = false
-
-                        while (retryCount < maxRetries && !healthy) {
-                            healthy = bat(
-                                script: "curl -f http://localhost:5001/health",
-                                returnStatus: true
-                            ) == 0
-
-                            if (!healthy) {
-                                echo "Health check attempt ${retryCount + 1}/${maxRetries} failed, retrying..."
-                                bat "timeout /t 5 /nobreak"
-                                retryCount++
-                            }
-                        }
-
-                        if (!healthy) {
-                            error("Container failed to become healthy after ${maxRetries} attempts")
+                    // Health-check with retry
+                    retry(10) {
+                        sleep(time: 5, unit: 'SECONDS')
+                        def status = bat(
+                            script: 'curl -f http://localhost:5001/health',
+                            returnStatus: true
+                        )
+                        if (status != 0) {
+                            error("Health check failed, retrying…")
                         }
                     }
 
@@ -376,32 +349,17 @@ pipeline {
             }
             post {
                 always {
-                    script {
-                        // Safely get logs
-                        def containerExists = bat(
-                            script: "docker ps -a --format \"{{.Names}}\" | findstr /B jenkins-llm",
-                            returnStatus: true
-                        ) == 0
-
-                        if (containerExists) {
-                            bat "docker logs jenkins-llm > logs.txt 2>&1"
-                        } else {
-                            writeFile file: 'logs.txt', text: 'No container logs available'
-                        }
-                    }
+                    // Logs
+                    bat "docker logs jenkins-llm > logs.txt || exit 0"
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
                 failure {
-                    script {
-                        // Cleanup on failure
-                        bat '''
-                            docker stop jenkins-llm 2>nul || echo "Nothing to stop"
-                            docker rm jenkins-llm 2>nul || echo "Nothing to remove"
-                        '''
-                    }
+                    // Clean up
+                    bat "docker rm -f jenkins-llm || exit 0"
                 }
             }
         }
+
 
         stage('Release') {
             when {

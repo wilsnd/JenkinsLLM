@@ -29,10 +29,6 @@ def create_app(model_path=None, vocab_path=None):
     if vocab_path is None:
         vocab_path = "/app/processed_data/vocabulary.json"
 
-    # Or use relative paths from /app/inference/
-    model_path = "../models/all_models/latest.pt"
-    vocab_path = "../processed_data/vocabulary.json"
-
     print(f"Model path: {model_path}")
     print(f"Vocab path: {vocab_path}")
     print(f"Model exists: {os.path.exists(model_path)}")
