@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project code
 COPY . .
-COPY models/ /models/
-COPY processed_data/ /processed_data/
+COPY processed_data/vocabulary.json /processed_data/vocabulary.json
+COPY models/all_models/latest.pt /models/all_models/latest.pt
 
 # Create dir
 RUN mkdir -p /models/all_models /processed_data /app/monitoring /app/logs /app/test-results
