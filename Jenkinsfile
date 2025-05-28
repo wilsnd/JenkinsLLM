@@ -323,41 +323,31 @@ pipeline {
             steps {
                 script {
                     echo "🚀 Stage 5: Deploy to Test Environment"
-                    // Remove any old container, then start the new one
-                    bat 'docker rm -f jenkins-llm || exit 0'
-                    bat "docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
 
-                    // Wait for container to appear healthy
+                    bat 'docker rm -f jenkins-llm || exit 0'
+
+                    bat "docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG jenkins-llm:${env.BUILD_NUMBER}"
+
                     def healthy = false
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 1; i <= 10; i++) {
                         sleep time: 5, unit: 'SECONDS'
                         def code = bat(
                             script: 'curl -s -o nul -w "%{http_code}" http://localhost:5001/health',
                             returnStdout: true
                         ).trim()
-                        echo "Health check returned HTTP ${code}"
+                        echo "Attempt ${i}: HTTP ${code}"
                         if (code == '200') {
                             healthy = true
                             break
                         }
                     }
                     if (!healthy) {
-                        error "Health check failed after multiple attempts"
+                        error "Health check failed after 10 attempts"
                     }
-                    echo "✅ Deploy successful!"
-                }
-            }
-            post {
-                always {
-                    bat 'docker logs jenkins-llm > logs.txt || exit 0'
-                    archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
-                }
-                failure {
-                    bat 'docker rm -f jenkins-llm || exit 0'
+                    echo "Service is healthy!"
                 }
             }
         }
-
 
         stage('Release') {
             when {
