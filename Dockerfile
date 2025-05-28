@@ -18,9 +18,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project code
 COPY . .
+COPY models/ /models/
+COPY processed_data/ /processed_data/
 
 # Create dir
-RUN mkdir -p /app/monitoring /app/logs /app/test-results
+RUN mkdir -p /models/all_models /processed_data /app/monitoring /app/logs /app/test-results
 
 # Set the environment variables
 ENV PYTHONPATH=/app
