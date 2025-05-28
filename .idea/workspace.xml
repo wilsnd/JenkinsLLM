@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Deploy">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -269,15 +268,7 @@
       <workItem from="1748234516462" duration="29564000" />
       <workItem from="1748318300995" duration="29815000" />
       <workItem from="1748401246026" duration="6647000" />
-      <workItem from="1748436986727" duration="3511000" />
-    </task>
-    <task id="LOCAL-00004" summary="Commit 4">
-      <option name="closed" value="true" />
-      <created>1748176223433</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1748176223433</updated>
+      <workItem from="1748436986727" duration="4176000" />
     </task>
     <task id="LOCAL-00005" summary="Commit 5">
       <option name="closed" value="true" />
@@ -663,7 +654,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748439528610</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Deploy">
+      <option name="closed" value="true" />
+      <created>1748440726103</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1748440726103</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

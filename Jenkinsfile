@@ -329,15 +329,20 @@ pipeline {
                     // Verify deployment
                     bat "docker ps --filter name=jenkins-llm"
                     // Health check
-                    retry(10) {
+                    def healthy = false
+                    for (int i = 0; i < 10; i++) {
                         sleep(time: 5, unit: 'SECONDS')
-                        def status = bat(
-                            script: 'curl -f http://localhost:5001/health',
-                            returnStatus: true
-                        )
-                        if (status != 0) {
-                            error("Health check failed, retrying…")
+                        def code = bat(
+                            script: 'curl -s -o nul -w "%{http_code}" http://localhost:5001/health',
+                            returnStdout: true
+                        ).trim()
+                        if (code == '200') {
+                            healthy = true
+                            break
                         }
+                    }
+                    if (!healthy) {
+                        error "Health check failed"
                     }
                     echo "✅ Deploy successful!"
                 }
@@ -354,6 +359,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Release') {
             when {
