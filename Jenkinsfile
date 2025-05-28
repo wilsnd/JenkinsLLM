@@ -322,32 +322,44 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    echo "🚀 Stage 5: Deploy to Test Environment"
+                    echo "🚀 Deploying test container"
+                    // Remove old container
+                    bat "docker rm -f jenkins-llm || exit 0"
 
-                    bat 'docker rm -f jenkins-llm || exit 0'
+                    // Run
+                    bat """docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"""
 
-                    bat "docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG jenkins-llm:${env.BUILD_NUMBER}"
+                    // Check
+                    bat "docker ps --filter name=jenkins-llm"
 
-                    def healthy = false
-                    for (int i = 1; i <= 10; i++) {
-                        sleep time: 5, unit: 'SECONDS'
-                        def code = bat(
-                            script: 'curl -s -o nul -w "%{http_code}" http://localhost:5001/health',
-                            returnStdout: true
-                        ).trim()
-                        echo "Attempt ${i}: HTTP ${code}"
-                        if (code == '200') {
-                            healthy = true
-                            break
+                    // Health check
+                    retry(10) {
+                        sleep(time: 5, unit: 'SECONDS')
+                        def status = bat(
+                            script: 'curl -f http://localhost:5001/health',
+                            returnStatus: true
+                        )
+                        if (status != 0) {
+                            error("Health check failed, retrying…")
                         }
                     }
-                    if (!healthy) {
-                        error "Health check failed after 10 attempts"
-                    }
-                    echo "Service is healthy!"
+
+                    echo "✅ Deploy successful!"
+                }
+            }
+            post {
+                always {
+                    // Logs
+                    bat "docker logs jenkins-llm > logs.txt || exit 0"
+                    archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
+                }
+                failure {
+                    // Clean up
+                    bat "docker rm -f jenkins-llm || exit 0"
                 }
             }
         }
+
 
         stage('Release') {
             when {
