@@ -323,39 +323,37 @@ pipeline {
             steps {
                 script {
                     echo "🚀 Stage 5: Deploy to Test Environment"
-                    // Deploy container
-                    bat "docker rm -f jenkins-llm || exit 0"
+                    // Remove any old container, then start the new one
+                    bat 'docker rm -f jenkins-llm || exit 0'
                     bat "docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
-                    // Verify deployment
-                    bat "docker ps --filter name=jenkins-llm"
-                    // Health check
+
+                    // Wait for container to appear healthy
                     def healthy = false
                     for (int i = 0; i < 10; i++) {
-                        sleep(time: 5, unit: 'SECONDS')
+                        sleep time: 5, unit: 'SECONDS'
                         def code = bat(
                             script: 'curl -s -o nul -w "%{http_code}" http://localhost:5001/health',
                             returnStdout: true
                         ).trim()
+                        echo "Health check returned HTTP ${code}"
                         if (code == '200') {
                             healthy = true
                             break
                         }
                     }
                     if (!healthy) {
-                        error "Health check failed"
+                        error "Health check failed after multiple attempts"
                     }
                     echo "✅ Deploy successful!"
                 }
             }
             post {
                 always {
-                    // Logs
-                    bat "docker logs jenkins-llm > logs.txt || exit 0"
+                    bat 'docker logs jenkins-llm > logs.txt || exit 0'
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
                 failure {
-                    // Cleanup
-                    bat "docker rm -f jenkins-llm || exit 0"
+                    bat 'docker rm -f jenkins-llm || exit 0'
                 }
             }
         }
