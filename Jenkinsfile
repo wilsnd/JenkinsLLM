@@ -327,21 +327,51 @@ pipeline {
                 bat "docker stop jenkins-llm || echo No container"
                 bat "docker rm jenkins-llm || echo No container"
 
-                // Deploy 
-                bat "docker run -d --name jenkins-llm -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                // Deploy with error handling
+                script {
+                    def deployResult = bat(
+                        script: "docker run -d --name jenkins-llm -p 5001:5000 ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}",
+                        returnStatus: true
+                    )
 
-                // Verify
-                bat "docker ps | findstr jenkins-llm"
+                    if (deployResult != 0) {
+                        error("Docker run failed with exit code: ${deployResult}")
+                    }
+                }
 
-                // Wait and test
-                bat "timeout /t 20 /nobreak"
+                // Give container time to start
+                bat "timeout /t 5 /nobreak"
+
+                // Check if container is running
+                bat "docker ps -a | findstr jenkins-llm"
+
+                // Get logs immediately to see startup issues
+                bat "docker logs jenkins-llm"
+
+                // Verify container is actually running (not exited)
+                script {
+                    def containerStatus = bat(
+                        script: "docker inspect -f '{{.State.Status}}' jenkins-llm",
+                        returnStdout: true
+                    ).trim()
+
+                    echo "Container status: ${containerStatus}"
+
+                    if (containerStatus != "running") {
+                        bat "docker logs jenkins-llm"
+                        error("Container is not running. Status: ${containerStatus}")
+                    }
+                }
+
+                // Wait longer and test
+                bat "timeout /t 15 /nobreak"
                 bat "curl -f http://localhost:5001/health"
 
                 echo "✅ Deploy successful!"
             }
             post {
                 always {
-                    bat "docker logs jenkins-llm > logs.txt || echo No logs > logs.txt"
+                    bat "docker logs jenkins-llm > logs.txt || echo No container > logs.txt"
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
             }
