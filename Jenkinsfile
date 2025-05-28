@@ -322,17 +322,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    echo "🚀 Deploying test container"
-                    // Remove old container
+                    echo "🚀 Stage 5: Deploy to Test Environment"
+                    // Deploy container
                     bat "docker rm -f jenkins-llm || exit 0"
-
-                    // Run
-                    bat """docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"""
-
-                    // Quick verify
+                    bat "docker run -d --name jenkins-llm -p 5001:5000 -e ENVIRONMENT=test -e LOG_LEVEL=DEBUG ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                    // Verify deployment
                     bat "docker ps --filter name=jenkins-llm"
-
-                    // Health-check with retry
+                    // Health check
                     retry(10) {
                         sleep(time: 5, unit: 'SECONDS')
                         def status = bat(
@@ -343,7 +339,6 @@ pipeline {
                             error("Health check failed, retrying…")
                         }
                     }
-
                     echo "✅ Deploy successful!"
                 }
             }
@@ -354,12 +349,11 @@ pipeline {
                     archiveArtifacts artifacts: 'logs.txt', allowEmptyArchive: true
                 }
                 failure {
-                    // Clean up
+                    // Cleanup
                     bat "docker rm -f jenkins-llm || exit 0"
                 }
             }
         }
-
 
         stage('Release') {
             when {
