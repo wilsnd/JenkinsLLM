@@ -383,7 +383,7 @@ pipeline {
                     // Pre-release validation
                     echo "🔍 Pre-release validation..."
 
-                    // Make sure the test environment is still healthy
+                    // Health Check
                     def testHealthy = bat(
                         script: "curl -f http://localhost:5001/health --max-time 10",
                         returnStatus: true
@@ -393,7 +393,7 @@ pipeline {
                         error("❌ Test environment unhealthy, aborting release")
                     }
 
-                    // Tag the Docker image for production
+                    // Tag the Docker image
                     bat """
                         docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ${env.DOCKER_IMAGE}:${releaseVersion}
                         docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ${env.DOCKER_IMAGE}:production
@@ -423,7 +423,7 @@ pipeline {
 
                     writeJSON file: 'release-notes.json', json: releaseNotes
 
-                    // Check if production container exists for blue-green deployment
+                    // Check production container for blue green
                     def prodExists = bat(
                         script: "docker inspect ${prodDeploymentName} 2>nul",
                         returnStatus: true

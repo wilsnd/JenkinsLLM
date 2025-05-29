@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Deploy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inference/flask_web.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/flask_web.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,15 +270,7 @@
       <workItem from="1748318300995" duration="29815000" />
       <workItem from="1748401246026" duration="6647000" />
       <workItem from="1748436986727" duration="5877000" />
-      <workItem from="1748486734369" duration="4420000" />
-    </task>
-    <task id="LOCAL-00012" summary="jenkinsfile">
-      <option name="closed" value="true" />
-      <created>1748325141539</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1748325141539</updated>
+      <workItem from="1748486734369" duration="5892000" />
     </task>
     <task id="LOCAL-00013" summary="jenkinsfile">
       <option name="closed" value="true" />
@@ -664,7 +656,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748489633913</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Deploy">
+      <option name="closed" value="true" />
+      <created>1748493670817</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1748493670818</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
