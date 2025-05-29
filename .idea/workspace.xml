@@ -7,8 +7,6 @@
     <list default="true" id="55d0d7ca-3673-40a6-8c9d-9e295a5d4438" name="Changes" comment="Deploy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-pipeline.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,23 +270,7 @@
       <workItem from="1748318300995" duration="29815000" />
       <workItem from="1748401246026" duration="6647000" />
       <workItem from="1748436986727" duration="5877000" />
-      <workItem from="1748486734369" duration="8094000" />
-    </task>
-    <task id="LOCAL-00015" summary="jenkinsfile">
-      <option name="closed" value="true" />
-      <created>1748325944737</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1748325944737</updated>
-    </task>
-    <task id="LOCAL-00016" summary="jenkinsfile">
-      <option name="closed" value="true" />
-      <created>1748326103951</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1748326103951</updated>
+      <workItem from="1748486734369" duration="9601000" />
     </task>
     <task id="LOCAL-00017" summary="jenkinsfile">
       <option name="closed" value="true" />
@@ -666,7 +648,23 @@
       <option name="project" value="LOCAL" />
       <updated>1748495983227</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Deploy">
+      <option name="closed" value="true" />
+      <created>1748497434289</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1748497434290</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Deploy">
+      <option name="closed" value="true" />
+      <created>1748497702314</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1748497702314</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
