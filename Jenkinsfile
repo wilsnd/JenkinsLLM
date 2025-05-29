@@ -362,12 +362,6 @@ pipeline {
 
 
         stage('Release') {
-            when {
-                anyOf {
-                    branch 'main'
-                    branch 'master'
-                }
-            }
             steps {
                 echo "🎯 Stage 6: Release to Production Environment"
 
