@@ -332,44 +332,15 @@ pipeline {
                     // Check if container is running
                     bat "docker ps --filter name=jenkins-llm"
 
-                    // Check log
-                    bat "docker logs jenkins-llm"
-
                     // Health check
-                    bat """
-                    docker exec jenkins-llm python -c "
-                    import requests
-                    import time
-                    for i in range(20):
-                        try:
-                            response = requests.get('http://localhost:5000/health', timeout=5)
-                            print(f'Attempt {i+1}: Status {response.status_code}')
-                            if response.status_code == 200:
-                                print('Health check passed!')
-                                break
-                        except Exception as e:
-                            print(f'Attempt {i+1}: Error {e}')
-                        time.sleep(10)
-                    "
-                    """
-
-                    retry(20) {
-                        sleep(time: 10, unit: 'SECONDS')
-                        script {
-                            def healthStatus = bat(
-                                script: '''
-                                    curl -v http://localhost:5001/health --max-time 30 --connect-timeout 10
-                                ''',
-                                returnStatus: true
-                            )
-
-                            if (healthStatus != 0) {
-                                // Print debug
-                                bat "docker logs --tail 20 jenkins-llm"
-                                bat "docker exec jenkins-llm ps aux"
-                                bat "docker exec jenkins-llm netstat -tulpn"
-                                error("Health check failed, retrying... (attempt details printed above)")
-                            }
+                    retry(10) {
+                        sleep(time: 5, unit: 'SECONDS')
+                        def status = bat(
+                            script: 'curl -f http://localhost:5001/health',
+                            returnStatus: true
+                        )
+                        if (status != 0) {
+                            error("Health check failed, retrying…")
                         }
                     }
 
