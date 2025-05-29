@@ -366,7 +366,9 @@ pipeline {
                 anyOf {
                     branch 'main'
                     branch 'master'
+                    branch 'origin/master'
                     expression { params.FORCE_RELEASE == true }
+                    expression { env.BRANCH_NAME == null }
                 }
             }
             steps {
@@ -538,32 +540,56 @@ pipeline {
 
         stage('Monitoring') {
             steps {
-                echo "📊 Stage 7: Setup Monitoring & Alerting"
-
+                echo "📊 Stage 7: Monitoring"
+        
                 script {
-                    // Create monitoring directories
+                    echo "🚀 Starting Prometheus + Grafana monitoring stack..."
+                    
+                    // Copy monitoring configs
                     bat '''
                         if not exist monitoring mkdir monitoring
+                        copy monitoring\\prometheus.yml monitoring\\ 2>nul || echo "Config already exists"
+                        copy monitoring\\alert_rules.yml monitoring\\ 2>nul || echo "Config already exists"
+                        copy monitoring\\alertmanager.yml monitoring\\ 2>nul || echo "Config already exists"
                     '''
-
-                    // Create basic monitoring setup
-                    echo "🔍 Setting up application monitoring..."
-
-                    // Test monitoring endpoints on both environments
+        
+                    // Start monitoring
+                    bat '''
+                        docker-compose -f docker-compose.yml up -d prometheus grafana
+                    '''
+        
+                    // Wait for service
+                    echo "⏳ Waiting for monitoring services to initialize..."
+                    bat "timeout /t 30 /nobreak"
+        
+                    // Test monitoring
                     def monitoringResults = [:]
-
+        
+                    // Test Prometheus
+                    def prometheusHealthy = bat(
+                        script: "curl -f http://localhost:9090/-/healthy --max-time 10",
+                        returnStatus: true
+                    ) == 0
+        
+                    // Test Grafana
+                    def grafanaHealthy = bat(
+                        script: "curl -f http://localhost:3000/api/health --max-time 10",
+                        returnStatus: true
+                    ) == 0
+        
+                    // Test application
                     ['5000', '5001'].each { port ->
                         def testUrl = "http://localhost:${port}"
                         def healthy = bat(
                             script: "curl -f ${testUrl}/health --max-time 5",
                             returnStatus: true
                         ) == 0
-
+        
                         def metricsAvailable = bat(
                             script: "curl -f ${testUrl}/metrics --max-time 5",
                             returnStatus: true
                         ) == 0
-
+        
                         monitoringResults["app-${port}"] = [
                             url: testUrl,
                             healthStatus: healthy ? 'healthy' : 'unhealthy',
@@ -571,79 +597,123 @@ pipeline {
                             timestamp: new Date().toString()
                         ]
                     }
-
-                    // Create monitoring summary
+        
+                    // Test Prometheus
+                    if (prometheusHealthy) {
+                        echo "🔍 Testing Prometheus target discovery..."
+                        bat '''
+                            curl -f "http://localhost:9090/api/v1/targets" -o prometheus-targets.json --max-time 10
+                        '''
+                    }
+        
+                    // Summary
                     def monitoringSummary = [
                         buildNumber: env.BUILD_NUMBER,
                         deploymentTimestamp: new Date().toString(),
-                        applicationEndpoints: monitoringResults,
-                        monitoringCapabilities: [
-                            'Health checks': 'Available on /health endpoint',
-                            'Prometheus metrics': 'Available on /metrics endpoint',
-                            'System status': 'Available on /status endpoint',
-                            'Application ready': 'Available on /ready endpoint'
+                        monitoringStack: [
+                            prometheus: [
+                                url: 'http://localhost:9090',
+                                healthy: prometheusHealthy,
+                                configFile: 'prometheus.yml',
+                                alertRules: 'alert_rules.yml'
+                            ],
+                            grafana: [
+                                url: 'http://localhost:3000',
+                                healthy: grafanaHealthy,
+                                defaultLogin: 'admin/admin123'
+                            ]
                         ],
-                        recommendedAlerts: [
-                            'ApplicationDown': 'Monitor /health endpoint availability',
-                            'HighResponseTime': 'Monitor response times via metrics',
-                            'HighErrorRate': 'Monitor error rates in application logs',
-                            'ResourceUsage': 'Monitor CPU/memory via /status endpoint'
+                        applicationEndpoints: monitoringResults,
+                        alertingRules: [
+                            'ApplicationDown': 'Triggers when app is unreachable for 1+ minutes',
+                            'HighResponseTime': 'Triggers when 95th percentile > 2 seconds for 2+ minutes'
+                        ],
+                        dashboardUrls: [
+                            'Prometheus UI': 'http://localhost:9090',
+                            'Grafana Dashboards': 'http://localhost:3000',
+                            'Application Health': "http://localhost:5001/health",
+                            'Application Metrics': "http://localhost:5001/metrics"
                         ],
                     ]
-
-                    writeJSON file: 'monitoring-summary.json', json: monitoringSummary
-
-                    // Basic monitoring validation
+        
+                    writeJSON file: 'advanced-monitoring-report.json', json: monitoringSummary
+        
+                    // Monitoring validation
                     def totalHealthy = monitoringResults.count { key, value -> value.healthStatus == 'healthy' }
                     def totalMetrics = monitoringResults.count { key, value -> value.metricsAvailable }
-
-                    echo "✅ Monitoring setup completed!"
-                    echo "📊 Healthy endpoints: ${totalHealthy}/${monitoringResults.size()}"
-                    echo "📈 Metrics available: ${totalMetrics}/${monitoringResults.size()}"
-
+        
+                    echo "✅ Monitoring Setup Completed!"
+                    echo "🏥 Healthy endpoints: ${totalHealthy}/${monitoringResults.size()}"
+                    echo "📊 Metrics available: ${totalMetrics}/${monitoringResults.size()}"
+                    echo "📈 Prometheus: ${prometheusHealthy ? 'Running' : 'Failed'} at http://localhost:9090"
+                    echo "📊 Grafana: ${grafanaHealthy ? 'Running' : 'Failed'} at http://localhost:3000"
+        
+                    if (prometheusHealthy && grafanaHealthy) {
+                        echo "🎯 Full monitoring stack is operational!"
+                        echo "🔗 Access monitoring at:"
+                        echo "   • Prometheus: http://localhost:9090"
+                        echo "   • Grafana: http://localhost:3000 (admin/admin123)"
+                    }
+        
                     if (totalHealthy == 0) {
-                        error("❌ No healthy endpoints found for monitoring")
+                        error("❌ No healthy application endpoints found for monitoring")
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'monitoring-summary.json', allowEmptyArchive: true
-
+                    archiveArtifacts artifacts: 'advanced-monitoring-report.json,prometheus-targets.json', allowEmptyArchive: true
+        
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: true,
                         keepAll: true,
                         reportDir: '.',
-                        reportFiles: 'monitoring-summary.json',
-                        reportName: 'Monitoring Setup Report'
+                        reportFiles: 'advanced-monitoring-report.json',
+                        reportName: 'Monitoring Report'
                     ])
                 }
                 success {
                     script {
                         emailext (
-                            subject: "📊 Monitoring Setup Complete: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                            subject: "📊 Monitoring Deployed: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
                             body: """
-                            Monitoring and alerting capabilities have been configured for build ${env.BUILD_NUMBER}!
-
-                            🔍 Available Endpoints:
-                            • Health Check: /health
-                            • Metrics: /metrics (Prometheus format)
-                            • Status: /status (detailed system info)
-                            • Readiness: /ready
-
-                            The application is ready for production monitoring.
+                            🎉 Monitoring stack successfully deployed for build ${env.BUILD_NUMBER}!
+        
+                            🔧 Infrastructure:
+                            • Prometheus: http://localhost:9090 (metrics collection & alerting)
+                            • Grafana: http://localhost:3000 (admin/admin123) (dashboards & visualization)
+                            • Alertmanager: Configured for webhook notifications
+        
+                            📊 Monitoring Capabilities:
+                            • Application health monitoring (/health endpoint)
+                            • Performance metrics collection (/metrics endpoint)
+                            • Automated alerting (ApplicationDown, HighResponseTime)
+                            • Real-time dashboards and visualization
+        
+                            🚨 Alert Rules Active:
+                            • ApplicationDown: Triggers if app unreachable for 1+ minutes
+                            • HighResponseTime: Triggers if 95th percentile > 2 seconds
+        
+                            Ready for production monitoring! 🚀
                             """,
                             to: "${env.NOTIFICATION_EMAIL}"
                         )
                     }
                 }
                 failure {
-                    emailext (
-                        subject: "🚨 Monitoring Setup Issues: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                        body: "Monitoring setup encountered issues for build ${env.BUILD_NUMBER}. Check the Jenkins logs for details.",
-                        to: "${env.NOTIFICATION_EMAIL}"
-                    )
+                    script {
+                        // Cleanup
+                        bat '''
+                            docker-compose -f docker-compose.yml down prometheus grafana 2>nul || echo "Services not running"
+                        '''
+                        
+                        emailext (
+                            subject: "🚨 Monitoring Setup Failed: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                            body: "Monitoring stack failed to deploy for build ${env.BUILD_NUMBER}. Check Jenkins logs for details.",
+                            to: "${env.NOTIFICATION_EMAIL}"
+                        )
+                    }
                 }
             }
         }

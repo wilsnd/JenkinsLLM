@@ -10,6 +10,7 @@ safety~=2.3.0
 bandit~=1.7.5
 prometheus-client~=0.17.0
 psutil~=5.9.5
+numpy~=1.24.3
 flask-cors~=4.0.0
 gunicorn~=21.2.0
 # torch+cu118 can be installed if NVidia CUDA gpu is available !!! Important !!!
