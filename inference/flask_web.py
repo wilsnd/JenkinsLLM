@@ -23,7 +23,7 @@ def create_app(model_path=None, vocab_path=None):
     app = Flask(__name__)
     CORS(app)
 
-    # Use correct default paths
+    # Model path
     if model_path is None:
         model_path = "/app/models/all_models/latest.pt"
     if vocab_path is None:
