@@ -67,7 +67,7 @@ def create_app(model_path=None, vocab_path=None):
         <!DOCTYPE html>
         <html>
         <head>
-                <title>Jenkins LLM API</title>
+            <title>El El EM</title>
             <style>
                 body {
                     margin: 0;
